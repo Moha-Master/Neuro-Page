@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdmirror.com/npm/bulma@1.0.2/css/bulma.min.css">
+    <title>Follow Vedal meow | 关注Vedal喵</title>
+    <style>
+        @font-face {
+            font-family: 'First Coffee';
+            src: url('fonts/first-coffee.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: fallback;
+        }
+        body {
+            font-family: 'First Coffee', Arial, sans-serif;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #2d2d2d;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            white-space: nowrap;
+        }
+        .title-sub {
+            display: inline;
+        }
+        @media (max-width: 768px) {
+             h1 {
+                white-space: normal;
+             }
+             .title-sub {
+                display: none;
+             }
+        }
+        img {
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px 0;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #e6f0ff;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .update-time {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+            <span class="title-main">Follow Vedal meow</span>
+            <span class="title-sub">, follow Vedal thank you meow</span>
+        </h1>
+    </header>
+
+    <main class="columns">
+        <div class="box column">
+            <p>Schedule of this week</p>
+            <img class="image" src="./images/schedule.png" alt="Schedule from Neuro Sama offical Discord">
+            <span id="update-time" class="update-time tag"><a href="https://discord.gg/AkXMj7VHsc" target="_blank" style="color: #666666">Update@Mar-21 13:46 GMT+8</a></span>
+        </div>
+
+        <div class="links column">
+            <div class="card is-centered">
+                <a href="https://twitch.tv/vedal987" target="_blank" class="card-header" style="padding: 8px 15px">Follow on Twitch</a>
+                <div class="media">
+                    <div class="media-left" style="margin-left:15px">
+                        <img src="./images/avatar.png" class="image is-48x48" alt="Avatar">
+                    </div>
+                    <div class="media-content" style="margin: 15px 0;">
+                        <p style="color: #000000">vedal987</p>
+                        <p style="color: #aaaaaa">752k follower</p>
+                    </div>
+                </div>
+                <p class="card-content" style="text-indent: 20px;">Neuro Sama started her vtuber life on Twitch, and that date, December 21, 2022, is considered as Neuro Sama's birthday.</p>
+            </div>
+            <div class="card">
+                <a href="https://space.bilibili.com/3546729368520811/" target="_blank" class="card-header" style="padding: 8px 15px">Follow on Bilibili</a>
+                <div class="media" style="margin-left:15px">
+                    <div class="media-left">
+                        <img src="./images/avatar.png" class="image is-48x48" alt="Avatar">
+                    </div>
+                    <div class="media-content" style="margin: 15px 0;">
+                        <p style="color: #000000">Vedal and Neuro-sama</p>
+                        <p style="color: #aaaaaa">739k follower</p>
+                    </div>
+                </div>
+                <p class="card-content" style="text-indent: 20px;">In August 2024, Neuro Sama came to Bilibili, her first Chinese stream got a great success, and the number of followers caught up with Twitch in a short time.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <p>*Evil sold out</p>
+        </div>
+        <div>
+            <a href="https://beian.miit.gov.cn/" target="_blank" style="font-family: Arial, sans-serif;">闽ICP备2024063477号-1</a>
+        </div>
+    </footer>
+</body>
+</html>
