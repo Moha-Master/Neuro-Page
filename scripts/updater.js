@@ -19,6 +19,12 @@ const CONFIG = {
 };
 
 // 初始化代理
+process.env.HTTP_PROXY = CONFIG.PROXY;
+process.env.HTTPS_PROXY = CONFIG.PROXY;
+process.env.ALL_PROXY = CONFIG.PROXY;
+process.env.http_PROXY = CONFIG.PROXY;
+process.env.https_PROXY = CONFIG.PROXY;
+process.env.all_PROXY = CONFIG.PROXY;
 const proxyAgent = new HttpsProxyAgent(CONFIG.PROXY);
 const undiciAgent = new ProxyAgent(CONFIG.PROXY);
 require('undici').setGlobalDispatcher(undiciAgent);
