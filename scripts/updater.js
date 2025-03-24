@@ -21,7 +21,7 @@ const CONFIG = {
 moment.locale('en-us');
 
 // ##############################
-//         Clash 服务模块
+//         Mihomo 服务模块
 // ##############################
 let needRestore = false;
 const clashClient = axios.create({
@@ -122,6 +122,30 @@ async function downloadFile(url) {
 // ##############################
 //        HTML 处理模块
 // ##############################
+async function getTwitchFollowers() {
+    try {
+        const { data } = await axios.get('https://twitchtracker.com/vedal987', {
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Accept-Language': 'en-US,en;q=0.9'
+            },
+        });
+
+        const $ = cheerio.load(data);
+        const statsSection = $('div.g-t:contains("Total followers")').first();
+        const cleanedText = '752,601'
+            .replace(/,/g, '') // 去除千分位逗号
+            .replace(/#/g, ''); // 去除可能存在的特殊字符
+        if (!/^\d+$/.test(cleanedText)) {
+            throw new Error(`无效的粉丝数格式: ${followersText}`);
+        }
+        const followers = parseInt(cleanedText, 10);
+    } catch (error) {
+        console.error('TwitchTracker请求失败:', error.message);
+        return '752k';
+    }
+}
+
 async function getBilibiliFollowers() {
     try {
         const response = await axios.get('https://api.bilibili.com/x/relation/stat', {
@@ -145,7 +169,7 @@ function updateTimestamp() {
 
         const htmlContent = fs.readFileSync(CONFIG.HTML_PATH, 'utf8')
             .replace(
-                /(<a\s+[^>]*?href="https:\/\/discord\.gg\/AkXMj7VHsc"[^>]*?target="_blank"[^>]*?class="tag is-light"[^>]*?>\s*Update@)[^<]*(<\/a>)/,
+                /(<a\s+[^>]*?id="update-time"[^>]*?>[\s\S]*?Update@)[^<]*(<\/a>)/,
                 `$1${now}$2`
             );
 
@@ -156,13 +180,20 @@ function updateTimestamp() {
     }
 }
 
-async function updateHtmlFile(biliFollowers) {
+async function updateHtmlFile(twitchFollowers, biliFollowers) {
     try {
         const html = fs.readFileSync(CONFIG.HTML_PATH, 'utf8');
         const $ = cheerio.load(html);
+
+        $('#twitch-follower').text(`${twitchFollowers} followers`);
         $('#bili-follower').text(`${biliFollowers} followers`);
-        fs.writeFileSync(CONFIG.HTML_PATH, $.html());
-        console.log('📄 HTML 文件更新完成');
+
+        await fs.promises.writeFile(CONFIG.HTML_PATH, $.html(), 'utf8');
+        
+        console.log('📄 HTML 文件更新完成，Twitch: %s, Bilibili: %s', 
+            twitchFollowers, 
+            biliFollowers
+        );
     } catch (error) {
         console.error('HTML 文件更新失败:', error.message);
     }
@@ -182,12 +213,14 @@ async function main() {
 
     try {
         await client.login(CONFIG.TOKEN);
-        
+
+        const twitchFollowers = await getTwitchFollowers();
         const biliFollowers = await getBilibiliFollowers();
+        console.log('获取粉丝数:', `T台: ${twitchFollowers}`);
         console.log('获取粉丝数:', `B站: ${biliFollowers}`);
         
         await Promise.all([
-            updateHtmlFile(biliFollowers),
+            updateHtmlFile(twitchFollowers, biliFollowers),
             (async () => {
                 const imageUrl = await findLatestImage();
                 if (await downloadFile(imageUrl)) {
