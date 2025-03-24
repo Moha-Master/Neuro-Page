@@ -2,9 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const { Client, GatewayIntentBits } = require('discord.js');
 const { HttpsProxyAgent } = require('https-proxy-agent');
-const { ProxyAgent } = require('undici');
+const { ProxyAgent, setGlobalDispatcher } = require('undici');
 const axios = require('axios');
 const moment = require('moment-timezone');
+const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
 require('dotenv').config();
 const token = process.env.token;
 const channel_id = process.env.channel_id;
@@ -19,15 +21,9 @@ const CONFIG = {
 };
 
 // 初始化代理
-process.env.HTTP_PROXY = CONFIG.PROXY;
-process.env.HTTPS_PROXY = CONFIG.PROXY;
-process.env.ALL_PROXY = CONFIG.PROXY;
-process.env.http_PROXY = CONFIG.PROXY;
-process.env.https_PROXY = CONFIG.PROXY;
-process.env.all_PROXY = CONFIG.PROXY;
 const proxyAgent = new HttpsProxyAgent(CONFIG.PROXY);
 const undiciAgent = new ProxyAgent(CONFIG.PROXY);
-require('undici').setGlobalDispatcher(undiciAgent);
+setGlobalDispatcher(undiciAgent)
 
 // 时间格式化配置
 moment.locale('en-us');
@@ -40,12 +36,6 @@ const client = new Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent
     ],
-    ws: {
-        agent: undiciAgent
-    },
-    rest: {
-        agent: undiciAgent
-    }
 });
 
 client.once('ready', () => {
@@ -113,9 +103,8 @@ function updateTimestamp() {
             .format('MMM D HH:mm [GMT]+8'); // 月份两位数字，24小时制
 
         const htmlContent = fs.readFileSync(CONFIG.HTML_PATH, 'utf8')
-            // 精准替换锚文本内容，保留所有标签属性
             .replace(
-                /(<span id="update-time" class="update-time tag"><a href="https:\/\/discord\.gg\/AkXMj7VHsc" target="_blank" style="color: #666666">Update@)[^<]*(<\/a><\/span>)/,
+                /(<a\s+[^>]*?href="https:\/\/discord\.gg\/AkXMj7VHsc"[^>]*?target="_blank"[^>]*?class="tag is-light"[^>]*?>\s*Update@)[^<]*(<\/a>)/,
                 `$1${now}$2`
             );
 
@@ -126,14 +115,55 @@ function updateTimestamp() {
     }
 }
 
+async function getBilibiliFollowers() {
+  const API_URL = 'https://api.bilibili.com/x/relation/stat';
+  
+  const response = await axios.get(API_URL, {
+    params: {
+      vmid: '3546729368520811'
+    },
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+    }
+  });
+
+  const followers = response.data.data.follower;
+  return followers >= 1000 ? `${(followers / 1000).toFixed(0)}k` : followers.toString();
+}
+
+async function updateHtmlFile(biliFollowers) {
+  const html = fs.readFileSync(CONFIG.HTML_PATH, 'utf8');
+  const $ = cheerio.load(html);
+
+  $('#bili-follower').text(`${biliFollowers} followers`);
+
+  fs.writeFileSync(CONFIG.HTML_PATH, $.html());
+}
+
 client.login(CONFIG.TOKEN).then(async () => {
+    try {
+        const [biliFollowers] = await Promise.all([
+            getBilibiliFollowers()
+    ]);
+
+    console.log('Updated followers:',
+          `Bilibili: ${biliFollowers}`
+    );
+
+        await updateHtmlFile(biliFollowers);
+    } catch (error) {
+        console.error('Update failed:', error);
+        process.exit(1);
+    }
     try {
         const imageUrl = await findLatestImage();
         if (await downloadFile(imageUrl)) {
             updateTimestamp();
         }
+    } catch (e) {
+        console.error('致命错误:', e);
+        process.exit(1);
     } finally {
         client.destroy();
-        process.exit(0);
     }
 });
