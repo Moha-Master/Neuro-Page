@@ -1,41 +1,65 @@
 const fs = require('fs');
 const path = require('path');
 const { Client, GatewayIntentBits } = require('discord.js');
-const { HttpsProxyAgent } = require('https-proxy-agent');
-const { ProxyAgent, setGlobalDispatcher } = require('undici');
 const axios = require('axios');
 const moment = require('moment-timezone');
-const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
 require('dotenv').config();
-const token = process.env.token;
-const channel_id = process.env.channel_id;
 
-// 配置参数
+// ##############################
+//         配置区块
+// ##############################
 const CONFIG = {
-    PROXY: 'http://127.0.0.1:7890',
-    CHANNEL_ID: channel_id,
-    TOKEN: token,
+    TIME_FORMAT: 'MMM D HH:mm [GMT]+8',
+    CLASH_CONFIG_ENDPOINT: 'http://127.0.0.1:8963',
+    CHANNEL_ID: process.env.channel_id,
+    TOKEN: process.env.token,
     IMAGE_PATH: path.resolve(__dirname, '../images/schedule.png'),
     HTML_PATH: path.resolve(__dirname, '../index.html')
 };
 
-// 初始化代理
-const proxyAgent = new HttpsProxyAgent(CONFIG.PROXY);
-const undiciAgent = new ProxyAgent(CONFIG.PROXY);
-setGlobalDispatcher(undiciAgent)
-
-// 时间格式化配置
 moment.locale('en-us');
-const TIME_FORMAT = 'MMM D HH:mm [GMT]+8'; // 示例：Jun 20 14:30 GMT+8
 
-// 创建Discord客户端
+// ##############################
+//         Clash 服务模块
+// ##############################
+let needRestore = false;
+const clashClient = axios.create({
+    baseURL: CONFIG.CLASH_CONFIG_ENDPOINT,
+    headers: process.env.CLASH_SECRET ? {
+        'Authorization': `Bearer ${process.env.CLASH_SECRET}`
+    } : {}
+});
+
+async function getTunStatus() {
+    try {
+        const response = await clashClient.get('/configs');
+        return response.data.tun?.enable || false;
+    } catch (error) {
+        console.error('获取 Clash 配置失败:', error.message);
+        process.exit(1);
+    }
+}
+
+async function setTunMode(enable) {
+    try {
+        await clashClient.patch('/configs', { tun: { enable } });
+        console.log(`✅ TUN 模式已 ${enable ? '启用' : '禁用'}`);
+    } catch (error) {
+        console.error('切换 TUN 模式失败:', error.message);
+        process.exit(1);
+    }
+}
+
+// ##############################
+//        Discord 客户端模块
+// ##############################
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent
-    ],
+    ]
 });
 
 client.once('ready', () => {
@@ -45,10 +69,9 @@ client.once('ready', () => {
 async function findLatestImage() {
     try {
         const channel = await client.channels.fetch(CONFIG.CHANNEL_ID);
-        // 获取最新的10条消息加快查找速度
         const messages = await channel.messages.fetch({ limit: 10 });
 
-        for (const [_, message] of messages) {
+        for (const message of messages.values()) {
             if (message.attachments.size > 0) {
                 const image = message.attachments.find(att => 
                     att.contentType?.startsWith('image/') || 
@@ -57,24 +80,25 @@ async function findLatestImage() {
                 if (image) return image.url;
             }
         }
-        throw new Error('⚠️ 最近10条消息中未找到图片');
+        throw new Error('最近10条消息中未找到图片');
 
     } catch (error) {
-        console.error('消息扫描失败:', error);
+        console.error('消息扫描失败:', error.message);
         process.exit(1);
     }
 }
 
+// ##############################
+//        文件操作模块
+// ##############################
 async function downloadFile(url) {
     try {
         const response = await axios({
             method: 'get',
             url: url,
-            responseType: 'stream',
-            httpsAgent: proxyAgent
+            responseType: 'stream'
         });
 
-        // 确保目录存在
         if (!fs.existsSync(path.dirname(CONFIG.IMAGE_PATH))) {
             fs.mkdirSync(path.dirname(CONFIG.IMAGE_PATH), { recursive: true });
         }
@@ -95,12 +119,29 @@ async function downloadFile(url) {
     }
 }
 
+// ##############################
+//        HTML 处理模块
+// ##############################
+async function getBilibiliFollowers() {
+    try {
+        const response = await axios.get('https://api.bilibili.com/x/relation/stat', {
+            params: { vmid: '3546729368520811' },
+            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
+        });
+
+        const followers = response.data.data.follower;
+        return followers >= 1000 ? `${(followers / 1000).toFixed(0)}k` : followers.toString();
+    } catch (error) {
+        console.error('获取B站粉丝数失败:', error.message);
+        return 'N/A';
+    }
+}
+
 function updateTimestamp() {
     try {
-        // 生成符合北京时间且与当前示例一致的时间格式（03-13 11:00 GMT+8）
         const now = moment()
             .tz('Asia/Shanghai')
-            .format('MMM D HH:mm [GMT]+8'); // 月份两位数字，24小时制
+            .format(CONFIG.TIME_FORMAT);
 
         const htmlContent = fs.readFileSync(CONFIG.HTML_PATH, 'utf8')
             .replace(
@@ -111,59 +152,77 @@ function updateTimestamp() {
         fs.writeFileSync(CONFIG.HTML_PATH, htmlContent);
         console.log('🕒 链接时间戳更新成功');
     } catch (error) {
-        console.error('⛔ 时间戳更新失败:', error.message);
+        console.error('时间戳更新失败:', error.message);
     }
-}
-
-async function getBilibiliFollowers() {
-  const API_URL = 'https://api.bilibili.com/x/relation/stat';
-  
-  const response = await axios.get(API_URL, {
-    params: {
-      vmid: '3546729368520811'
-    },
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-    }
-  });
-
-  const followers = response.data.data.follower;
-  return followers >= 1000 ? `${(followers / 1000).toFixed(0)}k` : followers.toString();
 }
 
 async function updateHtmlFile(biliFollowers) {
-  const html = fs.readFileSync(CONFIG.HTML_PATH, 'utf8');
-  const $ = cheerio.load(html);
-
-  $('#bili-follower').text(`${biliFollowers} followers`);
-
-  fs.writeFileSync(CONFIG.HTML_PATH, $.html());
+    try {
+        const html = fs.readFileSync(CONFIG.HTML_PATH, 'utf8');
+        const $ = cheerio.load(html);
+        $('#bili-follower').text(`${biliFollowers} followers`);
+        fs.writeFileSync(CONFIG.HTML_PATH, $.html());
+        console.log('📄 HTML 文件更新完成');
+    } catch (error) {
+        console.error('HTML 文件更新失败:', error.message);
+    }
 }
 
-client.login(CONFIG.TOKEN).then(async () => {
-    try {
-        const [biliFollowers] = await Promise.all([
-            getBilibiliFollowers()
-    ]);
+// ##############################
+//        主程序逻辑
+// ##############################
+async function main() {
+    const isTunEnabled = await getTunStatus();
+    console.log(`ℹ️ 当前 TUN 状态: ${isTunEnabled ? '已启用' : '已禁用'}`);
 
-    console.log('Updated followers:',
-          `Bilibili: ${biliFollowers}`
-    );
-
-        await updateHtmlFile(biliFollowers);
-    } catch (error) {
-        console.error('Update failed:', error);
-        process.exit(1);
+    if (!isTunEnabled) {
+        await setTunMode(true);
+        needRestore = true;
     }
+
     try {
-        const imageUrl = await findLatestImage();
-        if (await downloadFile(imageUrl)) {
-            updateTimestamp();
-        }
-    } catch (e) {
-        console.error('致命错误:', e);
+        await client.login(CONFIG.TOKEN);
+        
+        const biliFollowers = await getBilibiliFollowers();
+        console.log('获取粉丝数:', `B站: ${biliFollowers}`);
+        
+        await Promise.all([
+            updateHtmlFile(biliFollowers),
+            (async () => {
+                const imageUrl = await findLatestImage();
+                if (await downloadFile(imageUrl)) {
+                    updateTimestamp();
+                }
+            })()
+        ]);
+    } catch (error) {
+        console.error('主程序运行失败:', error.message);
         process.exit(1);
     } finally {
         client.destroy();
+        console.log('🔌 Discord 客户端已断开');
     }
+}
+
+// ##############################
+//        退出清理逻辑
+// ##############################
+async function cleanup() {
+    if (needRestore) {
+        console.log('\n🔄 恢复 TUN 状态...');
+        await setTunMode(false);
+    }
+}
+
+['SIGINT', 'SIGTERM', 'exit'].forEach(event => {
+    process.on(event, async () => {
+        if (event !== 'exit') setTimeout(() => process.exit(), 100);
+        await cleanup();
+    });
+});
+
+// 启动程序
+main().catch(err => {
+    console.error('程序异常终止:', err);
+    process.exit(1);
 });
