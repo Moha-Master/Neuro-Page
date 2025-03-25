@@ -101,20 +101,22 @@ async function getTwitchFollowers() {
         });
 
         const $ = cheerio.load(data);
-        const followersText = $('div.g-t:contains("Total followers")').next().text().trim();
+        const followersElement = $('div.g-x-s-label:contains("Total followers")').parent().find('.g-x-s-value span:not(.g-x-s-value-addon)');
+        const followersText = followersElement.text().trim();
+        
         const cleanedText = followersText
             .replace(/,/g, '')
             .replace(/#/g, '');
             
         if (!/^\d+$/.test(cleanedText)) {
-            throw new Error(`Invaild format: ${followersText}`);
+            throw new Error(`Invalid format: ${followersText}`);
         }
         
         const followers = parseInt(cleanedText, 10);
         return followers >= 1000 ? `${(followers / 1000).toFixed(0)}k` : followers.toString();
     } catch (error) {
         console.error('TwitchTracker request failed:', error.message);
-        return '752k';
+        return '756k';
     }
 }
 
