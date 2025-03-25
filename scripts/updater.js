@@ -13,8 +13,8 @@ const CONFIG = {
     TIME_FORMAT: 'MMM D HH:mm [GMT]+8',
     CHANNEL_ID: process.env.CHANNEL_ID,
     TOKEN: process.env.DISCORD_TOKEN,
-    IMAGE_PATH: path.resolve(__dirname, 'public/images/schedule.png'),
-    DATA_PATH: path.resolve(__dirname, 'public/data.json'),
+    IMAGE_PATH: path.resolve(__dirname, '../images/schedule.png'),
+    DATA_PATH: path.resolve(__dirname, '../public/data.json'),
     OUTPUT_DIR: path.resolve(__dirname, 'public')
 };
 
