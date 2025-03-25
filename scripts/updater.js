@@ -11,45 +11,14 @@ require('dotenv').config();
 // ##############################
 const CONFIG = {
     TIME_FORMAT: 'MMM D HH:mm [GMT]+8',
-    CLASH_CONFIG_ENDPOINT: 'http://127.0.0.1:8963',
-    CHANNEL_ID: process.env.channel_id,
-    TOKEN: process.env.token,
-    IMAGE_PATH: path.resolve(__dirname, '../images/schedule.png'),
-    HTML_PATH: path.resolve(__dirname, '../index.html')
+    CHANNEL_ID: process.env.CHANNEL_ID,
+    TOKEN: process.env.DISCORD_TOKEN,
+    IMAGE_PATH: path.resolve(__dirname, 'public/images/schedule.png'),
+    DATA_PATH: path.resolve(__dirname, 'public/data.json'),
+    OUTPUT_DIR: path.resolve(__dirname, 'public')
 };
 
 moment.locale('en-us');
-
-// ##############################
-//         Mihomo 服务模块
-// ##############################
-let needRestore = false;
-const clashClient = axios.create({
-    baseURL: CONFIG.CLASH_CONFIG_ENDPOINT,
-    headers: process.env.CLASH_SECRET ? {
-        'Authorization': `Bearer ${process.env.CLASH_SECRET}`
-    } : {}
-});
-
-async function getTunStatus() {
-    try {
-        const response = await clashClient.get('/configs');
-        return response.data.tun?.enable || false;
-    } catch (error) {
-        console.error('获取 Clash 配置失败:', error.message);
-        process.exit(1);
-    }
-}
-
-async function setTunMode(enable) {
-    try {
-        await clashClient.patch('/configs', { tun: { enable } });
-        console.log(`✅ TUN 模式已 ${enable ? '启用' : '禁用'}`);
-    } catch (error) {
-        console.error('切换 TUN 模式失败:', error.message);
-        process.exit(1);
-    }
-}
 
 // ##############################
 //        Discord 客户端模块
@@ -120,26 +89,29 @@ async function downloadFile(url) {
 }
 
 // ##############################
-//        HTML 处理模块
+//        数据获取模块
 // ##############################
 async function getTwitchFollowers() {
     try {
         const { data } = await axios.get('https://twitchtracker.com/vedal987', {
-        headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept-Language': 'en-US,en;q=0.9'
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Accept-Language': 'en-US,en;q=0.9'
             },
         });
 
         const $ = cheerio.load(data);
-        const statsSection = $('div.g-t:contains("Total followers")').first();
+        const followersText = $('div.g-t:contains("Total followers")').next().text().trim();
         const cleanedText = followersText
             .replace(/,/g, '') // 去除千分位逗号
             .replace(/#/g, ''); // 去除可能存在的特殊字符
+            
         if (!/^\d+$/.test(cleanedText)) {
             throw new Error(`无效的粉丝数格式: ${followersText}`);
         }
+        
         const followers = parseInt(cleanedText, 10);
+        return followers >= 1000 ? `${(followers / 1000).toFixed(0)}k` : followers.toString();
     } catch (error) {
         console.error('TwitchTracker请求失败:', error.message);
         return '752k';
@@ -161,41 +133,30 @@ async function getBilibiliFollowers() {
     }
 }
 
-function updateTimestamp() {
+// ##############################
+//        JSON 数据生成模块
+// ##############################
+async function generateDataFile(twitchFollowers, biliFollowers) {
     try {
         const now = moment()
             .tz('Asia/Shanghai')
             .format(CONFIG.TIME_FORMAT);
 
-        const htmlContent = fs.readFileSync(CONFIG.HTML_PATH, 'utf8')
-            .replace(
-                /(<a\s+[^>]*?id="update-time"[^>]*?>[\s\S]*?Update@)[^<]*(<\/a>)/,
-                `$1${now}$2`
-            );
-
-        fs.writeFileSync(CONFIG.HTML_PATH, htmlContent);
-        console.log('🕒 链接时间戳更新成功');
-    } catch (error) {
-        console.error('时间戳更新失败:', error.message);
-    }
-}
-
-async function updateHtmlFile(twitchFollowers, biliFollowers) {
-    try {
-        const html = fs.readFileSync(CONFIG.HTML_PATH, 'utf8');
-        const $ = cheerio.load(html);
-
-        $('#twitch-follower').text(`${twitchFollowers} followers`);
-        $('#bili-follower').text(`${biliFollowers} followers`);
-
-        await fs.promises.writeFile(CONFIG.HTML_PATH, $.html(), 'utf8');
-
-        console.log('📄 HTML 文件更新完成，Twitch: %s, Bilibili: %s',
+        const data = {
+            lastUpdated: now,
             twitchFollowers,
-            biliFollowers
-        );
+            bilibiliFollowers: biliFollowers,
+            imageUrl: 'images/schedule.png' // 相对路径
+        };
+
+        if (!fs.existsSync(CONFIG.OUTPUT_DIR)) {
+            fs.mkdirSync(CONFIG.OUTPUT_DIR, { recursive: true });
+        }
+
+        fs.writeFileSync(CONFIG.DATA_PATH, JSON.stringify(data, null, 2));
+        console.log('📊 数据文件已生成:', data);
     } catch (error) {
-        console.error('HTML 文件更新失败:', error.message);
+        console.error('生成数据文件失败:', error.message);
     }
 }
 
@@ -203,14 +164,6 @@ async function updateHtmlFile(twitchFollowers, biliFollowers) {
 //        主程序逻辑
 // ##############################
 async function main() {
-    const isTunEnabled = await getTunStatus();
-    console.log(`ℹ️ 当前 TUN 状态: ${isTunEnabled ? '已启用' : '已禁用'}`);
-
-    if (!isTunEnabled) {
-        await setTunMode(true);
-        needRestore = true;
-    }
-
     try {
         await client.login(CONFIG.TOKEN);
 
@@ -220,12 +173,10 @@ async function main() {
         console.log('获取粉丝数:', `B站: ${biliFollowers}`);
         
         await Promise.all([
-            updateHtmlFile(twitchFollowers, biliFollowers),
+            generateDataFile(twitchFollowers, biliFollowers),
             (async () => {
                 const imageUrl = await findLatestImage();
-                if (await downloadFile(imageUrl)) {
-                    updateTimestamp();
-                }
+                await downloadFile(imageUrl);
             })()
         ]);
     } catch (error) {
@@ -236,23 +187,6 @@ async function main() {
         console.log('🔌 Discord 客户端已断开');
     }
 }
-
-// ##############################
-//        退出清理逻辑
-// ##############################
-async function cleanup() {
-    if (needRestore) {
-        console.log('\n🔄 恢复 TUN 状态...');
-        await setTunMode(false);
-    }
-}
-
-['SIGINT', 'SIGTERM', 'exit'].forEach(event => {
-    process.on(event, async () => {
-        if (event !== 'exit') setTimeout(() => process.exit(), 100);
-        await cleanup();
-    });
-});
 
 // 启动程序
 main().catch(err => {
