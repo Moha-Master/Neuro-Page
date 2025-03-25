@@ -133,7 +133,7 @@ async function getTwitchFollowers() {
 
         const $ = cheerio.load(data);
         const statsSection = $('div.g-t:contains("Total followers")').first();
-        const cleanedText = '752,601'
+        const cleanedText = followersText
             .replace(/,/g, '') // 去除千分位逗号
             .replace(/#/g, ''); // 去除可能存在的特殊字符
         if (!/^\d+$/.test(cleanedText)) {
@@ -189,9 +189,9 @@ async function updateHtmlFile(twitchFollowers, biliFollowers) {
         $('#bili-follower').text(`${biliFollowers} followers`);
 
         await fs.promises.writeFile(CONFIG.HTML_PATH, $.html(), 'utf8');
-        
-        console.log('📄 HTML 文件更新完成，Twitch: %s, Bilibili: %s', 
-            twitchFollowers, 
+
+        console.log('📄 HTML 文件更新完成，Twitch: %s, Bilibili: %s',
+            twitchFollowers,
             biliFollowers
         );
     } catch (error) {
