@@ -7,7 +7,7 @@ const cheerio = require('cheerio');
 require('dotenv').config();
 
 // ##############################
-//         配置区块
+//         Config
 // ##############################
 const CONFIG = {
     TIME_FORMAT: 'MMM D HH:mm [GMT]+8',
@@ -21,7 +21,7 @@ const CONFIG = {
 moment.locale('en-us');
 
 // ##############################
-//        Discord 客户端模块
+//        Discord Client
 // ##############################
 const client = new Client({
     intents: [
@@ -32,7 +32,7 @@ const client = new Client({
 });
 
 client.once('ready', () => {
-    console.log(`🏃 机器人 ${client.user.tag} 已就绪`);
+    console.log(`🏃 ${client.user.tag} ready.`);
 });
 
 async function findLatestImage() {
@@ -49,16 +49,16 @@ async function findLatestImage() {
                 if (image) return image.url;
             }
         }
-        throw new Error('最近10条消息中未找到图片');
+        throw new Error('No picture found in recent 10 messages.');
 
     } catch (error) {
-        console.error('消息扫描失败:', error.message);
+        console.error('Messages scan failed:', error.message);
         process.exit(1);
     }
 }
 
 // ##############################
-//        文件操作模块
+//        Files
 // ##############################
 async function downloadFile(url) {
     try {
@@ -77,19 +77,19 @@ async function downloadFile(url) {
 
         return new Promise((resolve, reject) => {
             writer.on('finish', () => {
-                console.log('✅ 图片已更新');
+                console.log('✅ Picture updated');
                 resolve(true);
             });
             writer.on('error', reject);
         });
     } catch (error) {
-        console.error('下载失败:', error.message);
+        console.error('Download failed:', error.message);
         return false;
     }
 }
 
 // ##############################
-//        数据获取模块
+//        Followers
 // ##############################
 async function getTwitchFollowers() {
     try {
@@ -103,17 +103,17 @@ async function getTwitchFollowers() {
         const $ = cheerio.load(data);
         const followersText = $('div.g-t:contains("Total followers")').next().text().trim();
         const cleanedText = followersText
-            .replace(/,/g, '') // 去除千分位逗号
-            .replace(/#/g, ''); // 去除可能存在的特殊字符
+            .replace(/,/g, '')
+            .replace(/#/g, '');
             
         if (!/^\d+$/.test(cleanedText)) {
-            throw new Error(`无效的粉丝数格式: ${followersText}`);
+            throw new Error(`Invaild format: ${followersText}`);
         }
         
         const followers = parseInt(cleanedText, 10);
         return followers >= 1000 ? `${(followers / 1000).toFixed(0)}k` : followers.toString();
     } catch (error) {
-        console.error('TwitchTracker请求失败:', error.message);
+        console.error('TwitchTracker request failed:', error.message);
         return '752k';
     }
 }
@@ -128,13 +128,13 @@ async function getBilibiliFollowers() {
         const followers = response.data.data.follower;
         return followers >= 1000 ? `${(followers / 1000).toFixed(0)}k` : followers.toString();
     } catch (error) {
-        console.error('获取B站粉丝数失败:', error.message);
+        console.error('Bilibili request failed:', error.message);
         return 'N/A';
     }
 }
 
 // ##############################
-//        JSON 数据生成模块
+//        Json generate
 // ##############################
 async function generateDataFile(twitchFollowers, biliFollowers) {
     try {
@@ -146,7 +146,7 @@ async function generateDataFile(twitchFollowers, biliFollowers) {
             lastUpdated: now,
             twitchFollowers,
             bilibiliFollowers: biliFollowers,
-            imageUrl: 'images/schedule.png' // 相对路径
+            imageUrl: 'images/schedule.png'
         };
 
         if (!fs.existsSync(CONFIG.OUTPUT_DIR)) {
@@ -154,14 +154,14 @@ async function generateDataFile(twitchFollowers, biliFollowers) {
         }
 
         fs.writeFileSync(CONFIG.DATA_PATH, JSON.stringify(data, null, 2));
-        console.log('📊 数据文件已生成:', data);
+        console.log('📊 JSON generated:', data);
     } catch (error) {
-        console.error('生成数据文件失败:', error.message);
+        console.error('JSON generation failed:', error.message);
     }
 }
 
 // ##############################
-//        主程序逻辑
+//        Main process
 // ##############################
 async function main() {
     try {
@@ -169,8 +169,8 @@ async function main() {
 
         const twitchFollowers = await getTwitchFollowers();
         const biliFollowers = await getBilibiliFollowers();
-        console.log('获取粉丝数:', `T台: ${twitchFollowers}`);
-        console.log('获取粉丝数:', `B站: ${biliFollowers}`);
+        console.log('Get followers:', `Twitch: ${twitchFollowers}`);
+        console.log('Get followers:', `Bilibili: ${biliFollowers}`);
         
         await Promise.all([
             generateDataFile(twitchFollowers, biliFollowers),
@@ -180,16 +180,16 @@ async function main() {
             })()
         ]);
     } catch (error) {
-        console.error('主程序运行失败:', error.message);
+        console.error('Main process failed:', error.message);
         process.exit(1);
     } finally {
         client.destroy();
-        console.log('🔌 Discord 客户端已断开');
+        console.log('🔌 Discord client logout.');
     }
 }
 
 // 启动程序
 main().catch(err => {
-    console.error('程序异常终止:', err);
+    console.error('ERROR:', err);
     process.exit(1);
 });
