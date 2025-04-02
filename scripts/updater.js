@@ -39,18 +39,45 @@ async function findLatestImage() {
     try {
         const channel = await client.channels.fetch(CONFIG.CHANNEL_ID);
         const messages = await channel.messages.fetch({ limit: 10 });
-        console.log('Messages attached: ', `${messages}`);
+        console.log('Messages fetched: ', messages.size);
 
         for (const message of messages.values()) {
             if (message.attachments.size > 0) {
                 const image = message.attachments.find(att => 
-                    att.contentType?.startsWith('*') || 
-                    ['.png', '.jpg', '.webp'].some(ext => att.url.endsWith(ext))
+                    att.contentType?.startsWith('image/') || 
+                    ['.png', '.jpg', '.jpeg', '.webp', '.gif'].some(ext => att.name.toLowerCase().endsWith(ext))
                 );
-                if (image) return image.url;
-                console.log('Image URL: ', `${image.url}`);
+                if (image) {
+                    console.log('Found image in attachments:', image.url);
+                    return image.url;
+                }
+            }
+
+            if (message.embeds.length > 0) {
+                const imageEmbed = message.embeds.find(embed => 
+                    embed.type === 'image' || 
+                    (embed.image && embed.image.url) ||
+                    (embed.thumbnail && embed.thumbnail.url)
+                );
+                
+                if (imageEmbed) {
+                    const imageUrl = imageEmbed.image?.url || imageEmbed.thumbnail?.url;
+                    if (imageUrl) {
+                        console.log('Found image in embed:', imageUrl);
+                        return imageUrl;
+                    }
+                }
+            }
+
+            if (message.content) {
+                const imageUrlMatch = message.content.match(/https?:\/\/[^\s]+?\.(png|jpg|jpeg|webp|gif)(?=\?|$)/i);
+                if (imageUrlMatch) {
+                    console.log('Found image URL in content:', imageUrlMatch[0]);
+                    return imageUrlMatch[0];
+                }
             }
         }
+
         throw new Error('No picture found in recent 10 messages.');
 
     } catch (error) {
