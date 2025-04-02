@@ -39,6 +39,7 @@ async function findLatestImage() {
     try {
         const channel = await client.channels.fetch(CONFIG.CHANNEL_ID);
         const messages = await channel.messages.fetch({ limit: 10 });
+        console.log('Messages attached: ', `${messages}`);
 
         for (const message of messages.values()) {
             if (message.attachments.size > 0) {
@@ -47,6 +48,7 @@ async function findLatestImage() {
                     ['.png', '.jpg', '.webp'].some(ext => att.url.endsWith(ext))
                 );
                 if (image) return image.url;
+                console.log('Image URL: ', `${image.url}`);
             }
         }
         throw new Error('No picture found in recent 10 messages.');
@@ -78,6 +80,7 @@ async function downloadFile(url) {
         return new Promise((resolve, reject) => {
             writer.on('finish', () => {
                 console.log('✅ Picture updated');
+                console.log('Image URL: ', `${url}`);
                 resolve(true);
             });
             writer.on('error', reject);
