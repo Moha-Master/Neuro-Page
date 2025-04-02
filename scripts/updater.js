@@ -39,7 +39,6 @@ async function findLatestImage() {
     try {
         const channel = await client.channels.fetch(CONFIG.CHANNEL_ID);
         const messages = await channel.messages.fetch({ limit: 10 });
-        console.log('Channel ID: ', `${channel}`);
         console.log('Messages attached: ', `${messages}`);
 
         for (const message of messages.values()) {
@@ -81,6 +80,7 @@ async function downloadFile(url) {
         return new Promise((resolve, reject) => {
             writer.on('finish', () => {
                 console.log('✅ Picture updated');
+                console.log('Image URL: ', `${url}`);
                 resolve(true);
             });
             writer.on('error', reject);
