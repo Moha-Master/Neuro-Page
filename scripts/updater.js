@@ -43,6 +43,7 @@ async function findLatestImage() {
         for (const message of messages.values()) {
             if (message.attachments.size > 0) {
                 const image = message.attachments.find(att => 
+                    att.contentType?.startsWith('*') || 
                     ['.png', '.jpg', '.webp'].some(ext => att.url.endsWith(ext))
                 );
                 if (image) return image.url;
