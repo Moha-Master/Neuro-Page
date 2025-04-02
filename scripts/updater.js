@@ -178,7 +178,9 @@ async function main() {
             generateDataFile(twitchFollowers, biliFollowers),
             (async () => {
                 const imageUrl = await findLatestImage();
+                console.log('Image URL', `${imageUrl }`);
                 await downloadFile(imageUrl);
+                console.log('✅ Picture updated');
             })()
         ]);
     } catch (error) {
