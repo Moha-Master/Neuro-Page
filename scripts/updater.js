@@ -39,12 +39,10 @@ async function findLatestImage() {
     try {
         const channel = await client.channels.fetch(CONFIG.CHANNEL_ID);
         const messages = await channel.messages.fetch({ limit: 10 });
-        console.log('Messages attached: ', `${messages}`);
 
         for (const message of messages.values()) {
             if (message.attachments.size > 0) {
                 const image = message.attachments.find(att => 
-                    att.contentType?.startsWith('image/') || 
                     ['.png', '.jpg', '.webp'].some(ext => att.url.endsWith(ext))
                 );
                 if (image) return image.url;
