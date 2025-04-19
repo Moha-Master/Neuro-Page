@@ -19,7 +19,7 @@ jobs:
           node-version: '20'
           
       - name: Install dependencies
-        run: npm install discord.js axios moment-timezone cheerio dotenv
+        run: npm install discord.js axios moment-timezone cheerio sharp dotenv
         
       - name: Run Discord bot
         env:

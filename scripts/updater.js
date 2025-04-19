@@ -4,6 +4,7 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const axios = require('axios');
 const moment = require('moment-timezone');
 const cheerio = require('cheerio');
+const sharp = require('sharp');
 require('dotenv').config();
 
 // ##############################
@@ -14,6 +15,7 @@ const CONFIG = {
     CHANNEL_ID: process.env.CHANNEL_ID,
     TOKEN: process.env.DISCORD_TOKEN,
     IMAGE_PATH: path.resolve(__dirname, '../images/schedule.png'),
+    WEBP_PATH: path.resolve(__dirname, '../images/schedule.webp'),
     DATA_PATH: path.resolve(__dirname, '../public/data.json'),
     OUTPUT_DIR: path.resolve(__dirname, 'public')
 };
@@ -93,26 +95,27 @@ async function downloadFile(url) {
         const response = await axios({
             method: 'get',
             url: url,
-            responseType: 'stream'
+            responseType: 'arraybuffer'
         });
 
         if (!fs.existsSync(path.dirname(CONFIG.IMAGE_PATH))) {
             fs.mkdirSync(path.dirname(CONFIG.IMAGE_PATH), { recursive: true });
         }
 
-        const writer = fs.createWriteStream(CONFIG.IMAGE_PATH);
-        response.data.pipe(writer);
+        fs.writeFileSync(CONFIG.IMAGE_PATH, response.data);
 
-        return new Promise((resolve, reject) => {
-            writer.on('finish', () => {
-                console.log('✅ Picture updated');
-                console.log('Image URL: ', `${url}`);
-                resolve(true);
-            });
-            writer.on('error', reject);
-        });
+        await sharp(response.data)
+            .webp({ 
+                quality: 80,
+                lossless: false
+            })
+            .toFile(CONFIG.WEBP_PATH);
+        
+        console.log('✅ Picture updated and converted to WebP');
+        console.log('Image URL: ', `${url}`);
+        return true;
     } catch (error) {
-        console.error('Download failed:', error.message);
+        console.error('Download or conversion failed:', error.message);
         return false;
     }
 }
@@ -132,15 +135,15 @@ async function getTwitchFollowers() {
         const $ = cheerio.load(data);
         const followersElement = $('div.g-x-s-label:contains("Total followers")').parent().find('.g-x-s-value span:not(.g-x-s-value-addon)');
         const followersText = followersElement.text().trim();
-        
+
         const cleanedText = followersText
             .replace(/,/g, '')
             .replace(/#/g, '');
-            
+
         if (!/^\d+$/.test(cleanedText)) {
             throw new Error(`Invalid format: ${followersText}`);
         }
-        
+
         const followers = parseInt(cleanedText, 10);
         return followers >= 1000 ? `${(followers / 1000).toFixed(0)}k` : followers.toString();
     } catch (error) {
@@ -177,7 +180,7 @@ async function generateDataFile(twitchFollowers, biliFollowers) {
             lastUpdated: now,
             twitchFollowers,
             bilibiliFollowers: biliFollowers,
-            imageUrl: 'images/schedule.png'
+            imageUrl: 'images/schedule.webp'
         };
 
         if (!fs.existsSync(CONFIG.OUTPUT_DIR)) {
