@@ -38,50 +38,49 @@ client.once('ready', () => {
 async function findLatestImage() {
     try {
         const channel = await client.channels.fetch(CONFIG.CHANNEL_ID);
-        const messages = await channel.messages.fetch({ limit: 10 });
+        const messages = await channel.messages.fetch({ limit: 10, order: 'desc' });
         console.log('Messages fetched: ', messages.size);
 
         for (const message of messages.values()) {
+            console.log(`Checking message ${message.id} (created: ${message.createdAt})`);
+
             if (message.attachments.size > 0) {
-                const image = message.attachments.find(att => 
-                    att.contentType?.startsWith('image/') || 
-                    ['.png', '.jpg', '.jpeg', '.webp', '.gif'].some(ext => att.name.toLowerCase().endsWith(ext))
-                );
-                if (image) {
-                    console.log('Found image in attachments:', image.url);
-                    return image.url;
+                for (const [_, attachment] of message.attachments) {
+                    const isImage = attachment.contentType?.startsWith('image/') || 
+                                   ['.png', '.jpg', '.jpeg', '.webp', '.gif'].some(ext => 
+                                       attachment.name?.toLowerCase().endsWith(ext));
+                    
+                    if (isImage) {
+                        console.log('✅ Found image in attachments:', attachment.url);
+                        return attachment.url;
+                    }
                 }
             }
 
             if (message.embeds.length > 0) {
-                const imageEmbed = message.embeds.find(embed => 
-                    embed.type === 'image' || 
-                    (embed.image && embed.image.url) ||
-                    (embed.thumbnail && embed.thumbnail.url)
-                );
-                
-                if (imageEmbed) {
-                    const imageUrl = imageEmbed.image?.url || imageEmbed.thumbnail?.url;
+                for (const embed of message.embeds) {
+                    const imageUrl = embed.image?.url || embed.thumbnail?.url;
                     if (imageUrl) {
-                        console.log('Found image in embed:', imageUrl);
+                        console.log('✅ Found image in embed:', imageUrl);
                         return imageUrl;
                     }
                 }
             }
 
             if (message.content) {
-                const imageUrlMatch = message.content.match(/https?:\/\/[^\s]+?\.(png|jpg|jpeg|webp|gif)(?=\?|$)/i);
+                const imageUrlMatch = message.content.match(
+                    /https?:\/\/[^\s]+?\.(png|jpg|jpeg|webp|gif)(\?[^\s]+)?/i
+                );
                 if (imageUrlMatch) {
-                    console.log('Found image URL in content:', imageUrlMatch[0]);
+                    console.log('✅ Found image URL in content:', imageUrlMatch[0]);
                     return imageUrlMatch[0];
                 }
             }
         }
 
-        throw new Error('No picture found in recent 10 messages.');
-
+        throw new Error('No image found in the last 10 messages.');
     } catch (error) {
-        console.error('Messages scan failed:', error.message);
+        console.error('🚨 Error scanning messages:', error.message);
         process.exit(1);
     }
 }
