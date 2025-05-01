@@ -27,6 +27,18 @@ jobs:
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
         run: node scripts/updater.js
 
+      - name: Check for changes in tracked files
+        id: check-changes
+        run: |
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- images/schedule.png images/schedule.webp 2>/dev/null || true)
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "Detected changes in: $CHANGED_FILES"
+            echo "should_purge=true" >> $GITHUB_OUTPUT
+          else
+            echo "No relevant changes detected."
+            echo "should_purge=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Commit changes
         run: |
           git config --global user.name "GitHub Actions"
@@ -34,3 +46,10 @@ jobs:
           git add public/ images/
           git commit -m "Update schedule and followers" || echo "No changes"
           git push
+
+      - name: Purge jsDelivr cache (if files changed)
+        if: steps.check-changes.outputs.should_purge == 'true'
+        run: |
+          echo "Purging jsDelivr cache for updated files..."
+          curl -X POST "https://purge.jsdelivr.net/gh/Moha-Master/Neuro-Page@main/images/schedule.png"
+          curl -X POST "https://purge.jsdelivr.net/gh/Moha-Master/Neuro-Page@main/images/schedule.webp"
