@@ -53,3 +53,5 @@ jobs:
           echo "Purging jsDelivr cache for updated files..."
           curl -X POST "https://purge.jsdelivr.net/gh/Moha-Master/Neuro-Page@main/images/schedule.png"
           curl -X POST "https://purge.jsdelivr.net/gh/Moha-Master/Neuro-Page@main/images/schedule.webp"
+          curl -X POST "https://purge.jsdmirror.com/gh/Moha-Master/Neuro-Page@main/images/schedule.png"
+          curl -X POST "https://purge.jsdmirror.com/gh/Moha-Master/Neuro-Page@main/images/schedule.webp"
