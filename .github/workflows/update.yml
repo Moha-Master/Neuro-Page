@@ -30,7 +30,7 @@ jobs:
           # Compare current HEAD with the previous commit to find changes in specific files and directories.
           # We check for changes in images/schedule.png, images/schedule.webp, and anything within the public/ directory.
           # Redirect stderr to /dev/null and use || true to prevent script failure if no diff exists.
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- images/schedule.png images/schedule.webp public/ 2>/dev/null || true)
+          CHANGED_FILES=$(git diff --name-only -- images/schedule.png images/schedule.webp public/ 2>/dev/null || true)
           if [ -n "$CHANGED_FILES" ]; then
             echo "Detected changes in: $CHANGED_FILES"
             echo "should_deploy=true" >> $GITHUB_OUTPUT
