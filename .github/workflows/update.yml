@@ -27,10 +27,10 @@ jobs:
       - name: Check for changes in tracked files
         id: check-changes
         run: |
-          # Compare current HEAD with the previous commit to find changes in specific files and directories.
-          # We check for changes in images/schedule.png, images/schedule.webp, and anything within the public/ directory.
+          # Compare the current working directory with the last commit (HEAD)
+          # to find changes in specific files and directories.
           # Redirect stderr to /dev/null and use || true to prevent script failure if no diff exists.
-          CHANGED_FILES=$(git diff --name-only -- images/schedule.png images/schedule.webp public/ 2>/dev/null || true)
+          CHANGED_FILES=$(git diff --name-only HEAD -- images/schedule.png images/schedule.webp public/ 2>/dev/null || true)
           if [ -n "$CHANGED_FILES" ]; then
             echo "Detected changes in: $CHANGED_FILES"
             echo "should_deploy=true" >> $GITHUB_OUTPUT
@@ -48,7 +48,7 @@ jobs:
           git commit -m "Update schedule and followers" || echo "No changes to commit"
           git push || echo "No changes to push"
 
-      - name: Deploy files to server via SCP (if files changed)
+      - name: Deploy files to server via SSH/Tar (if files changed)
         # This step only runs if the 'check-changes' step detected file modifications.
         if: steps.check-changes.outputs.should_deploy == 'true'
         uses: appleboy/ssh-action@v0.1.6 # Pin to a specific version for stability
@@ -58,29 +58,29 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }} # Use default SSH port 22 if SSH_PORT is not set
           script: |
-            # Define the remote path path from secrets
-            REMOTE_PATH="${{ secrets.REMOTE_PATH }}" # This should be /webservices/neuro-page
+            # Define the remote web root path from secrets
+            REMOTE_WEB_ROOT="${{ secrets.REMOTE_PATH }}" # This should be /webservices/neuro-page
 
-            echo "Deploying to ${REMOTE_PATH} on server."
+            echo "Starting deployment to ${REMOTE_WEB_ROOT} on server using tar over SSH."
 
-            # Ensure target directories exist on the server
-            mkdir -p "${REMOTE_PATH}/public"
-            mkdir -p "${REMOTE_PATH}/images"
-
-            # Copy specific image files to the remote images directory
-            # -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null is used to disable host key checking,
-            # which is common for ephemeral CI/CD connections. Ensure your server is trusted.
-            scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-                -P ${{ secrets.SSH_PORT || 22 }} \
-                images/schedule.png images/schedule.webp public/data.json \
-                ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:"${REMOTE_PATH}/images/"
-            echo "Files images/schedule.png and images/schedule.webp deployed to ${REMOTE_PATH}/images/"
-
-            # Copy the public directory contents recursively to the remote public directory
-            # The trailing slash on 'public/' ensures only contents are copied, but here we want public/ itself within REMOTE_PATH
-            # So, scp -r public/ destination will place public/ inside destination.
-            scp -r -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-                -P ${{ secrets.SSH_PORT || 22 }} \
-                public/ \
-                ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:"${REMOTE_PATH}/"
-            echo "Directory public/ and its contents deployed to ${REMOTE_PATH}/public/"
+            # Use tar to archive the specified files and directories locally,
+            # then pipe the archive directly over SSH to the remote server,
+            # where it is extracted into the REMOTE_WEB_ROOT.
+            # This performs the entire transfer in a single SSH session for the data.
+            # -c: create archive
+            # -f -: write archive to standard output
+            # images/schedule.png images/schedule.webp public/: files/dirs to archive
+            # |: pipe stdout to stdin of the next command (ssh)
+            # ssh ...: establishes the SSH connection
+            # "tar -x -C \"${REMOTE_WEB_ROOT}\"": command executed on the remote server
+            #    -x: extract files from archive
+            #    -C "${REMOTE_WEB_ROOT}": change directory to REMOTE_WEB_ROOT before extracting.
+            #                              This is crucial as tar preserves relative paths.
+            #                              e.g., images/schedule.png becomes ${REMOTE_WEB_ROOT}/images/schedule.png
+            #                              and public/ becomes ${REMOTE_WEB_ROOT}/public/
+            tar -c -f - images/schedule.png images/schedule.webp public/ | \
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/devnull \
+                -p ${{ secrets.SSH_PORT || 22 }} \
+                ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} \
+                "tar -x -C \"${REMOTE_WEB_ROOT}\""
+            echo "All specified files and directories deployed to ${REMOTE_WEB_ROOT}."
