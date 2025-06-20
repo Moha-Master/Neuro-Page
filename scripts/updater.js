@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { Client, GatewayIntentBits } = require('discord.js');
 const axios = require('axios');
-const moment = require('moment-timezone'); // 尽管这里不再用于格式化schedule time，但其他地方可能仍用
+const moment = require('moment-timezone');
 const cheerio = require('cheerio');
 const sharp = require('sharp');
 require('dotenv').config();
@@ -12,8 +12,6 @@ require('dotenv').config();
 // ##############################
 const CONFIG = {
     TIME_FORMAT: 'MMM D HH:mm [GMT]+8', // 用于JSON中的lastUpdated时间
-    // CONFIG.SCHEDULE_TIME_FORMAT 不再用于 schedule 数组中的 time 字段，
-    // 因为我们将直接存储 Unix 时间戳，由前端进行格式化。
     CHANNEL_ID: process.env.CHANNEL_ID,
     TOKEN: process.env.DISCORD_TOKEN,
     IMAGE_PATH: path.resolve(__dirname, '../images/schedule.png'),
