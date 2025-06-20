@@ -1,6 +1,36 @@
 {
-  "lastUpdated": "Jun 20 17:36 GMT+8",
+  "lastUpdated": "Jun 20 17:49 GMT+8",
   "twitchFollowers": "811k",
   "bilibiliFollowers": "762k",
-  "imageUrl": "images/schedule.webp"
+  "imageUrl": "images/schedule.webp",
+  "schedule": [
+    {
+      "time": 1750183200,
+      "content": "Experimental Neuro Stream"
+    },
+    {
+      "time": 1750269600,
+      "content": "Offline"
+    },
+    {
+      "time": 1750356000,
+      "content": "Evil Tries Working in Fast Food"
+    },
+    {
+      "time": 1750442400,
+      "content": "Offline"
+    },
+    {
+      "time": 1750528800,
+      "content": "Evil and Cerber Play Will You Press The Button?"
+    },
+    {
+      "time": 1750615200,
+      "content": "Offline"
+    },
+    {
+      "time": 1750701600,
+      "content": "Dev Stream"
+    }
+  ]
 }
