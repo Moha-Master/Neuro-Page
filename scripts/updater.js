@@ -37,8 +37,8 @@ client.once('ready', () => {
 });
 
 /**
- * 查找最新的包含图片的消息，并返回图片URL和消息文本内容。
- * @returns {Promise<{imageUrl: string, messageContent: string}>} 包含图片URL和消息文本内容的对象
+ * 查找最新的包含图片的消息，并返回图片URL、消息文本内容和消息URL。
+ * @returns {Promise<{imageUrl: string, messageContent: string, messageURL: string}>} 包含图片URL、消息文本内容和消息URL的对象
  */
 async function findLatestImage() {
     try {
@@ -50,6 +50,7 @@ async function findLatestImage() {
             console.log(`Checking message ${message.id} (created: ${message.createdAt})`);
             let imageUrl = null;
             const messageContent = message.content || ''; // 获取消息文本
+            const messageURL = `https://discord.com/channels/${message.guildId || '@me'}/${message.channelId}/${message.id}`; // 构造消息URL
 
             // 1. 检查附件中的图片
             if (message.attachments.size > 0) {
@@ -60,7 +61,8 @@ async function findLatestImage() {
                     if (isImage) {
                         imageUrl = attachment.url;
                         console.log('✅ Found image in attachments:', imageUrl);
-                        return { imageUrl: imageUrl, messageContent: messageContent };
+                        console.log('✅ Message URL:', messageURL);
+                        return { imageUrl: imageUrl, messageContent: messageContent, messageURL: messageURL };
                     }
                 }
             }
@@ -72,7 +74,8 @@ async function findLatestImage() {
                     if (embedImageUrl) {
                         imageUrl = embedImageUrl;
                         console.log('✅ Found image in embed:', imageUrl);
-                        return { imageUrl: imageUrl, messageContent: messageContent };
+                        console.log('✅ Message URL:', messageURL);
+                        return { imageUrl: imageUrl, messageContent: messageContent, messageURL: messageURL };
                     }
                 }
             }
@@ -85,7 +88,8 @@ async function findLatestImage() {
                 if (imageUrlMatch) {
                     imageUrl = imageUrlMatch[0];
                     console.log('✅ Found image URL in content:', imageUrl);
-                    return { imageUrl: imageUrl, messageContent: messageContent };
+                    console.log('✅ Message URL:', messageURL);
+                    return { imageUrl: imageUrl, messageContent: messageContent, messageURL: messageURL };
                 }
             }
         }
@@ -198,7 +202,6 @@ function parseScheduleMessage(messageText) {
         // 检查行是否以 Discord 时间戳开头，这是识别时间表项的关键
         const firstTimestampMatch = trimmedLine.match(timestampRegex);
         if (firstTimestampMatch && firstTimestampMatch.length > 0) {
-            // 提取 Unix 时间戳（秒）
             const unixTimestamp = parseInt(firstTimestampMatch[0].match(/<t:(\d+):/)[1], 10);
 
             let content = trimmedLine;
@@ -219,13 +222,10 @@ function parseScheduleMessage(messageText) {
             content = content.replace(discordLinkRegex, '');
 
             // 6. 清理可能剩下的 ' - ' 分隔符和多余空格
-            // 示例: " - - Experimental Neuro Stream" -> "Experimental Neuro Stream"
             content = content.replace(/^\s*-\s*-\s*/, '')
-                             // 示例: "- Offline" -> "Offline"
                              .replace(leadingDashRegex, '')
                              .trim();
 
-            // 如果清理后内容为空，则跳过
             if (content) {
                 schedule.push({
                     time: unixTimestamp, // 直接存储 Unix 时间戳
@@ -243,12 +243,14 @@ function parseScheduleMessage(messageText) {
 //        Json generate
 // ##############################
 /**
- * 生成包含更新时间、粉丝数、图片URL和时间表数据的JSON文件。
+ * 生成包含更新时间、粉丝数、Discord原始图片URL、消息URL和时间表数据的JSON文件。
  * @param {string} twitchFollowers Twitch粉丝数
  * @param {string} biliFollowers Bilibili粉丝数
  * @param {Array<Object>} scheduleData 解析后的时间表数据
+ * @param {string} originalImageUrl Discord上原始图片的URL
+ * @param {string} discordMessageURL Discord上原始消息的URL
  */
-async function generateDataFile(twitchFollowers, biliFollowers, scheduleData) {
+async function generateDataFile(twitchFollowers, biliFollowers, scheduleData, originalImageUrl, discordMessageURL) {
     try {
         const now = moment()
             .tz('Asia/Shanghai')
@@ -257,8 +259,9 @@ async function generateDataFile(twitchFollowers, biliFollowers, scheduleData) {
             lastUpdated: now,
             twitchFollowers,
             bilibiliFollowers: biliFollowers,
-            imageUrl: 'images/schedule.webp',
-            schedule: scheduleData // 新增字段：时间表数据
+            imageUrl: originalImageUrl, // 指向Discord上的原始图片URL
+            messageURL: discordMessageURL, // 指向Discord上的原始消息URL
+            schedule: scheduleData
         };
         if (!fs.existsSync(CONFIG.OUTPUT_DIR)) {
             fs.mkdirSync(CONFIG.OUTPUT_DIR, { recursive: true });
@@ -282,15 +285,16 @@ async function main() {
         console.log('Get followers:', `Twitch: ${twitchFollowers}`);
         console.log('Get followers:', `Bilibili: ${biliFollowers}`);
 
-        const { imageUrl, messageContent } = await findLatestImage();
+        // 调用 findLatestImage，并解构获取图片URL、消息内容和消息URL
+        const { imageUrl, messageContent, messageURL } = await findLatestImage();
 
         // 解析消息内容，获取时间表数据
         const scheduleData = parseScheduleMessage(messageContent);
 
         await Promise.all([
-            // 将解析后的时间表数据传递给 generateDataFile
-            generateDataFile(twitchFollowers, biliFollowers, scheduleData),
-            downloadFile(imageUrl)
+            // 将解析后的时间表数据、原始图片URL和消息URL传递给 generateDataFile
+            generateDataFile(twitchFollowers, biliFollowers, scheduleData, imageUrl, messageURL),
+            downloadFile(imageUrl) // 仍然下载原始图片到本地
         ]);
 
     } catch (error) {
