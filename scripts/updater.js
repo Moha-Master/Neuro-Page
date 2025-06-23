@@ -250,7 +250,7 @@ function parseScheduleMessage(messageText) {
  * @param {string} originalImageUrl Discord上原始图片的URL
  * @param {string} discordMessageURL Discord上原始消息的URL
  */
-async function generateDataFile(twitchFollowers, biliFollowers, scheduleData, originalImageUrl, discordMessageURL) {
+async function generateDataFile(twitchFollowers, biliFollowers, scheduleData, originalImageUrl) {
     try {
         const now = moment()
             .tz('Asia/Shanghai')
@@ -259,8 +259,7 @@ async function generateDataFile(twitchFollowers, biliFollowers, scheduleData, or
             lastUpdated: now,
             twitchFollowers,
             bilibiliFollowers: biliFollowers,
-            imageUrl: originalImageUrl, // 指向Discord上的原始图片URL
-            messageURL: discordMessageURL, // 指向Discord上的原始消息URL
+            imageUrl: originalImageUrl,
             schedule: scheduleData
         };
         if (!fs.existsSync(CONFIG.OUTPUT_DIR)) {
@@ -286,14 +285,14 @@ async function main() {
         console.log('Get followers:', `Bilibili: ${biliFollowers}`);
 
         // 调用 findLatestImage，并解构获取图片URL、消息内容和消息URL
-        const { imageUrl, messageContent, messageURL } = await findLatestImage();
+        const { imageUrl, messageContent} = await findLatestImage();
 
         // 解析消息内容，获取时间表数据
         const scheduleData = parseScheduleMessage(messageContent);
 
         await Promise.all([
             // 将解析后的时间表数据、原始图片URL和消息URL传递给 generateDataFile
-            generateDataFile(twitchFollowers, biliFollowers, scheduleData, imageUrl, messageURL),
+            generateDataFile(twitchFollowers, biliFollowers, scheduleData, imageUrl),
             downloadFile(imageUrl) // 仍然下载原始图片到本地
         ]);
 
