@@ -1,35 +1,35 @@
 {
-  "lastUpdated": "Jun 23 20:03 GMT+8",
-  "twitchFollowers": "811k",
-  "bilibiliFollowers": "763k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1384335072571949186/neuro_stream_schedule_week_25.png?ex=6859f701&is=6858a581&hm=ff1efd165471ffc2cf78222689e68b951948686bb2e288cea8625851938b3d98&",
+  "lastUpdated": "Jul 3 20:21 GMT+8",
+  "twitchFollowers": "815k",
+  "bilibiliFollowers": "768k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1389262562876719155/neuro_stream_schedule_week_27.png?ex=686746d6&is=6865f556&hm=a418e43a9f7ac13fa913da209e3952543169060752b81276ab488921feb5a8f0&",
   "schedule": [
     {
-      "time": 1750183200,
-      "content": "Experimental Neuro Stream"
+      "time": 1751392800,
+      "content": "Neuro Stream"
     },
     {
-      "time": 1750269600,
+      "time": 1751479200,
       "content": "Offline"
     },
     {
-      "time": 1750356000,
-      "content": "Evil Tries Working in Fast Food"
+      "time": 1751565600,
+      "content": "Evil Stream"
     },
     {
-      "time": 1750442400,
+      "time": 1751652000,
       "content": "Offline"
     },
     {
-      "time": 1750528800,
-      "content": "Evil and Cerber Play Will You Press The Button?"
+      "time": 1751738400,
+      "content": "Twin Camping Trip"
     },
     {
-      "time": 1750615200,
+      "time": 1751824800,
       "content": "Offline"
     },
     {
-      "time": 1750701600,
+      "time": 1751911200,
       "content": "Dev Stream"
     }
   ]
