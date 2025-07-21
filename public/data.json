@@ -1,7 +1,36 @@
 {
-  "lastUpdated": "Jul 14 08:21 GMT+8",
-  "twitchFollowers": "819k",
-  "bilibiliFollowers": "774k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1391867335287242863/neuro_stream_schedule_week_28.png?ex=68755df8&is=68740c78&hm=2cdb2c98c39aca0757791f8de67dd63bfe0fc7ecb6aa6ebf2d595ea7484606bf&",
-  "schedule": []
+  "lastUpdated": "Jul 21 08:21 GMT+8",
+  "twitchFollowers": "822k",
+  "bilibiliFollowers": "777k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1395394795408457779/neuro_stream_schedule_week_29.png?ex=687e3eac&is=687ced2c&hm=5084d3bafd70cc7a8bffaf820d16f470c8c36ecc710b15104cf39769051b7424&",
+  "schedule": [
+    {
+      "time": 1752602400,
+      "content": "Neuro Stream"
+    },
+    {
+      "time": 1752688800,
+      "content": "Offline"
+    },
+    {
+      "time": 1752775200,
+      "content": "Evil Stream"
+    },
+    {
+      "time": 1752861600,
+      "content": "Offline"
+    },
+    {
+      "time": 1752948000,
+      "content": "[Buckshot Roulette](<https://store.steampowered.com/app/2835570/Buckshot_Roulette/>) w/ Neuro, [Zentreya](<https://www.twitch.tv/zentreya>) & [Camila](<https://www.twitch.tv/camila>)"
+    },
+    {
+      "time": 1753034400,
+      "content": "Offline"
+    },
+    {
+      "time": 1753120800,
+      "content": "Offline"
+    }
+  ]
 }
