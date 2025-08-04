@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Jul 28 08:21 GMT+8",
-  "twitchFollowers": "826k",
-  "bilibiliFollowers": "781k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1396956891631849683/neuro_stream_schedule_week_30.png?ex=6887e1fd&is=6886907d&hm=f7b2c2ff6af9bbbe0a882e6d161592f1c88df15919817f2bad72601279bc0de1&",
+  "lastUpdated": "Aug 4 08:21 GMT+8",
+  "twitchFollowers": "831k",
+  "bilibiliFollowers": "783k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1399533267585077321/neuro_stream_schedule_week_31.png?ex=6891416d&is=688fefed&hm=cf1a6e7e6d7fd6b6edd862de9a079851d210a3991750b25f9499745bfd4f7d84&",
   "schedule": [
     {
-      "time": 1753207200,
+      "time": 1753812000,
       "content": "Neuro Stream"
     },
     {
-      "time": 1753293600,
-      "content": "Evil Karaoke"
-    },
-    {
-      "time": 1753380000,
-      "content": "Evil Stream"
-    },
-    {
-      "time": 1753466400,
+      "time": 1753898400,
       "content": "Offline"
     },
     {
-      "time": 1753552800,
-      "content": "Whispers from the Star (sponsored)"
+      "time": 1753984800,
+      "content": "(Experimental?) Evil Stream"
     },
     {
-      "time": 1753639200,
-      "content": "Neuro Plays osu!  (7/27)"
+      "time": 1754071200,
+      "content": "[Outer Wilds](<https://store.steampowered.com/app/753640/Outer_Wilds/>) w/ Vedal & Neuro"
     },
     {
-      "time": 1753725600,
-      "content": "Dev Stream"
+      "time": 1754157600,
+      "content": "[Firewatch](<https://store.steampowered.com/app/383870/Firewatch/>) w/ Neuro & [Laimu](<https://www.twitch.tv/limealicious>)"
+    },
+    {
+      "time": 1754244000,
+      "content": "Offline"
+    },
+    {
+      "time": 1754330400,
+      "content": "Offline"
     }
   ]
 }
