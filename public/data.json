@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Aug 4 08:21 GMT+8",
-  "twitchFollowers": "831k",
-  "bilibiliFollowers": "783k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1399533267585077321/neuro_stream_schedule_week_31.png?ex=6891416d&is=688fefed&hm=cf1a6e7e6d7fd6b6edd862de9a079851d210a3991750b25f9499745bfd4f7d84&",
+  "lastUpdated": "Aug 10 23:21 GMT+8",
+  "twitchFollowers": "756k",
+  "bilibiliFollowers": "785k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1401723483729301635/neuro_stream_schedule_week_32.png?ex=6899e1f9&is=68989079&hm=2335b65c6a6abe358b7c23c96a7d1f55dcfcb492d084b94cc2505e6a20b19e6d&",
   "schedule": [
     {
-      "time": 1753812000,
+      "time": 1754416800,
       "content": "Neuro Stream"
     },
     {
-      "time": 1753898400,
+      "time": 1754503200,
+      "content": "Neuro Karaoke"
+    },
+    {
+      "time": 1754589600,
+      "content": "Evil Stream"
+    },
+    {
+      "time": 1754676000,
+      "content": "Outer Wilds (Part 2) w/ Vedal & Neuro"
+    },
+    {
+      "time": 1754762400,
       "content": "Offline"
     },
     {
-      "time": 1753984800,
-      "content": "(Experimental?) Evil Stream"
+      "time": 1754848800,
+      "content": "RimWorld w/ [Koko](<https://www.twitch.tv/kokonuts>) & Evil"
     },
     {
-      "time": 1754071200,
-      "content": "[Outer Wilds](<https://store.steampowered.com/app/753640/Outer_Wilds/>) w/ Vedal & Neuro"
-    },
-    {
-      "time": 1754157600,
-      "content": "[Firewatch](<https://store.steampowered.com/app/383870/Firewatch/>) w/ Neuro & [Laimu](<https://www.twitch.tv/limealicious>)"
-    },
-    {
-      "time": 1754244000,
-      "content": "Offline"
-    },
-    {
-      "time": 1754330400,
-      "content": "Offline"
+      "time": 1754935200,
+      "content": "Dev Stream **(TBD; Might be offline!)**"
     }
   ]
 }
