@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Aug 25 08:21 GMT+8",
+  "lastUpdated": "Sep 1 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "796k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1406685555638407168/neuro_stream_schedule_week_34.png?ex=68ac9803&is=68ab4683&hm=df997d29cb49ecf0b8f455422fd4f79a4ec0c85b413617d480e454951576c2d4&",
+  "bilibiliFollowers": "806k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1409748179213352991/neuro_stream_schedule_week_35.png?ex=68b5c20d&is=68b4708d&hm=25073d78d68c95ce2150cf99775b73724425567c2835177eafa254775a1c58d5&",
   "schedule": [
     {
-      "time": 1755626400,
+      "time": 1756231200,
       "content": "Neuro Stream"
     },
     {
-      "time": 1755712800,
-      "content": "Twin Karaoke"
+      "time": 1756317600,
+      "content": "Evil's Bank Heist"
     },
     {
-      "time": 1755799200,
+      "time": 1756404000,
       "content": "Evil Stream"
     },
     {
-      "time": 1755885600,
-      "content": "Outer Wilds (Part 4) w/ Vedal & Neuro"
+      "time": 1756490400,
+      "content": "Numi & Evil Collab"
     },
     {
-      "time": 1755972000,
+      "time": 1756576800,
       "content": "Offline"
     },
     {
-      "time": 1756058400,
-      "content": "Offline"
+      "time": 1756663200,
+      "content": "Twin Rap Battle"
     },
     {
-      "time": 1756144800,
-      "content": "Evil Dev Stream"
+      "time": 1756749600,
+      "content": "Offline"
     }
   ]
 }
