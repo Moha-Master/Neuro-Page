@@ -1,35 +1,35 @@
 {
-  "lastUpdated": "Sep 1 08:21 GMT+8",
+  "lastUpdated": "Sep 8 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "806k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1409748179213352991/neuro_stream_schedule_week_35.png?ex=68b5c20d&is=68b4708d&hm=25073d78d68c95ce2150cf99775b73724425567c2835177eafa254775a1c58d5&",
+  "bilibiliFollowers": "812k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1412279409901310024/neuro_stream_schedule_week_36.png?ex=68bef772&is=68bda5f2&hm=d16bf05726e00cb71b41e18224ac0a272ce99a5a171adcde035a13bd8e0c5875&",
   "schedule": [
     {
-      "time": 1756231200,
+      "time": 1756836000,
       "content": "Neuro Stream"
     },
     {
-      "time": 1756317600,
-      "content": "Evil's Bank Heist"
+      "time": 1756922400,
+      "content": "Evil Karaoke"
     },
     {
-      "time": 1756404000,
+      "time": 1757008800,
       "content": "Evil Stream"
     },
     {
-      "time": 1756490400,
-      "content": "Numi & Evil Collab"
-    },
-    {
-      "time": 1756576800,
+      "time": 1757095200,
       "content": "Offline"
     },
     {
-      "time": 1756663200,
-      "content": "Twin Rap Battle"
+      "time": 1757181600,
+      "content": "Offline"
     },
     {
-      "time": 1756749600,
+      "time": 1757268000,
+      "content": "Neuro Gives **YOU** Financial Advice*"
+    },
+    {
+      "time": 1757354400,
       "content": "Offline"
     }
   ]
