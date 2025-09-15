@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Sep 8 08:21 GMT+8",
+  "lastUpdated": "Sep 15 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "812k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1412279409901310024/neuro_stream_schedule_week_36.png?ex=68bef772&is=68bda5f2&hm=d16bf05726e00cb71b41e18224ac0a272ce99a5a171adcde035a13bd8e0c5875&",
+  "bilibiliFollowers": "820k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1414968984536612944/neuro_stream_schedule_week_37.png?ex=68c8178e&is=68c6c60e&hm=fa341a4ada4f1644db711d91554f1b6974649f1c52fed7bcce0767f88a1cc328&",
   "schedule": [
     {
-      "time": 1756836000,
+      "time": 1757440800,
       "content": "Neuro Stream"
     },
     {
-      "time": 1756922400,
-      "content": "Evil Karaoke"
+      "time": 1757527200,
+      "content": "Neuro's \"Normal\" Day at the Office"
     },
     {
-      "time": 1757008800,
+      "time": 1757613600,
       "content": "Evil Stream"
     },
     {
-      "time": 1757095200,
+      "time": 1757700000,
+      "content": "[Mimi](<https://www.youtube.com/@MageMimi/featured>) & Neuro Collab ️"
+    },
+    {
+      "time": 1757786400,
       "content": "Offline"
     },
     {
-      "time": 1757181600,
+      "time": 1757872800,
       "content": "Offline"
     },
     {
-      "time": 1757268000,
-      "content": "Neuro Gives **YOU** Financial Advice*"
-    },
-    {
-      "time": 1757354400,
-      "content": "Offline"
+      "time": 1757959200,
+      "content": "Dev Stream"
     }
   ]
 }
