@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Sep 15 08:21 GMT+8",
+  "lastUpdated": "Sep 21 11:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "820k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1414968984536612944/neuro_stream_schedule_week_37.png?ex=68c8178e&is=68c6c60e&hm=fa341a4ada4f1644db711d91554f1b6974649f1c52fed7bcce0767f88a1cc328&",
+  "bilibiliFollowers": "826k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1417319476830929028/neuro_stream_schedule_week_38.png?ex=68d0a49f&is=68cf531f&hm=e5aaf8a05f3285bec5bf9725fefd0e20ca21b08e648b0d7f758961408b7be46c&",
   "schedule": [
     {
-      "time": 1757440800,
+      "time": 1758045600,
       "content": "Neuro Stream"
     },
     {
-      "time": 1757527200,
-      "content": "Neuro's \"Normal\" Day at the Office"
+      "time": 1758132000,
+      "content": "Neuro Karaoke"
     },
     {
-      "time": 1757613600,
+      "time": 1758218400,
       "content": "Evil Stream"
     },
     {
-      "time": 1757700000,
-      "content": "[Mimi](<https://www.youtube.com/@MageMimi/featured>) & Neuro Collab ️"
+      "time": 1758312000,
+      "content": "Geoguessr w/ [Filian](<https://twitch.tv/filian>) & Neuro    **<-- Different from normal stream time!!**"
     },
     {
-      "time": 1757786400,
+      "time": 1758412800,
+      "content": "Evil Explores Japan w/ [robcdee](<https://twitch.tv/robcdee>)  **<-- Different from normal stream time!!**"
+    },
+    {
+      "time": 1758477600,
       "content": "Offline"
     },
     {
-      "time": 1757872800,
+      "time": 1758564000,
       "content": "Offline"
-    },
-    {
-      "time": 1757959200,
-      "content": "Dev Stream"
     }
   ]
 }
