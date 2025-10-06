@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Sep 29 08:21 GMT+8",
+  "lastUpdated": "Oct 6 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "828k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1419856579934556332/neuro_stream_schedule_week_39.png?ex=68da883c&is=68d936bc&hm=46d2b1e5a74faf1a6fb373d7b7dd97b7446076383fc2890960df3191d3357d68&",
+  "bilibiliFollowers": "832k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1422715268131721350/neuro_stream_schedule_week_40.png?ex=68e445d8&is=68e2f458&hm=2baf7ec527a2675e58e7d5c480aaf310f1da0f758a8be188d13e8998cfc35982&",
   "schedule": [
     {
-      "time": 1758650400,
+      "time": 1759255200,
       "content": "Neuro Stream"
     },
     {
-      "time": 1758736800,
-      "content": "Neuro's Job Hunt"
+      "time": 1759341600,
+      "content": "Evil Karaoke"
     },
     {
-      "time": 1758823200,
+      "time": 1759428000,
       "content": "Evil Stream"
     },
     {
-      "time": 1758909600,
+      "time": 1759514400,
       "content": "Offline"
     },
     {
-      "time": 1758996000,
+      "time": 1759600800,
+      "content": "Twin Buckshot Roulette"
+    },
+    {
+      "time": 1759687200,
+      "content": "The Witness w/ Evil"
+    },
+    {
+      "time": 1759773600,
       "content": "Offline"
-    },
-    {
-      "time": 1759082400,
-      "content": "[Matara Kan](<https://www.twitch.tv/matarakan>) & Neuro Try Weird Foods from Trader Joe's"
-    },
-    {
-      "time": 1759168800,
-      "content": "Dev Stream"
     }
   ]
 }
