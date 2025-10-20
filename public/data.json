@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Oct 13 08:21 GMT+8",
+  "lastUpdated": "Oct 20 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "845k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1425204579028570213/evil_stream_schedule_week_41.png?ex=68ed5432&is=68ec02b2&hm=4cc02d129e39a97d308f5e3e7e3496359abc3fac2fa0de4ec4e3d036c01e9ddb&",
+  "bilibiliFollowers": "850k",
+  "imageUrl": "https://s3.neurosama.ai/1427744367178940527-1427744366646001764-neuro_stream_schedule_week_42.png",
   "schedule": [
     {
-      "time": 1759860000,
-      "content": "Offline"
-    },
-    {
-      "time": 1759946400,
-      "content": "~~ -  - Evil's Prison Break ~~ **re-scheduling for a later date**"
-    },
-    {
-      "time": 1760032800,
-      "content": "Evil Stream"
-    },
-    {
-      "time": 1760119200,
+      "time": 1760464800,
       "content": "Neuro Stream"
     },
     {
-      "time": 1760205600,
-      "content": "Planet Zoo w/ Cerber & Evil"
+      "time": 1760551200,
+      "content": "Neuro Karaoke"
     },
     {
-      "time": 1760292000,
-      "content": "The Witness w/ Vedal & Evil"
+      "time": 1760637600,
+      "content": "Evil Stream"
     },
     {
-      "time": 1760378400,
-      "content": "Dev Stream"
+      "time": 1760724000,
+      "content": "Neuro Fishing 2"
+    },
+    {
+      "time": 1760810400,
+      "content": "Offline"
+    },
+    {
+      "time": 1760896800,
+      "content": "Offline"
+    },
+    {
+      "time": 1760983200,
+      "content": "Offline"
     }
   ]
 }
