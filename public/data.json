@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Oct 27 08:21 GMT+8",
+  "lastUpdated": "Nov 3 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "854k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1430662485157089340/neuro_stream_schedule_week_43.png?ex=68ffddc4&is=68fe8c44&hm=d5a5c6359f5c0f836407de40ad1af2f8775a125aeebddc9a763e7bec1b5804ad&",
+  "bilibiliFollowers": "856k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1432885975519858769/neuro_stream_schedule_week_44.png?ex=6909460e&is=6907f48e&hm=3adeff3e1d1d8dfc87708b0f94ae3b1acbe0c4482ae66265b79a5a2539beb825&",
   "schedule": [
     {
-      "time": 1761069600,
+      "time": 1761678000,
       "content": "Neuro Stream"
     },
     {
-      "time": 1761156000,
-      "content": "Offline"
+      "time": 1761764400,
+      "content": "Evil Karaoke"
     },
     {
-      "time": 1761242400,
+      "time": 1761850800,
       "content": "Evil Stream"
     },
     {
-      "time": 1761328800,
+      "time": 1761937200,
+      "content": "Layna Cooking Collab"
+    },
+    {
+      "time": 1762023600,
       "content": "Offline"
     },
     {
-      "time": 1761415200,
-      "content": "Neuro VS Evil: Minecraft  ️"
+      "time": 1762110000,
+      "content": "The Witness w/ Evil & Vedal   **OR** Minecraft w/ Others ️"
     },
     {
-      "time": 1761505200,
-      "content": "Evil's Prison Break"
-    },
-    {
-      "time": 1761591600,
-      "content": "Dev Stream"
+      "time": 1762196400,
+      "content": "Offline"
     }
   ]
 }
