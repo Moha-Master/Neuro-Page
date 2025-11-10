@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Nov 3 08:21 GMT+8",
+  "lastUpdated": "Nov 10 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "856k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1432885975519858769/neuro_stream_schedule_week_44.png?ex=6909460e&is=6907f48e&hm=3adeff3e1d1d8dfc87708b0f94ae3b1acbe0c4482ae66265b79a5a2539beb825&",
+  "bilibiliFollowers": "859k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1435160833234698240/neuro_stream_schedule_week_45.png?ex=6912356e&is=6910e3ee&hm=dd4ee2419d5a99b1f412d5f92cd6e32c483b8be695e0e5fe099a557c72457d7c&",
   "schedule": [
     {
-      "time": 1761678000,
+      "time": 1762282800,
       "content": "Neuro Stream"
     },
     {
-      "time": 1761764400,
-      "content": "Evil Karaoke"
+      "time": 1762369200,
+      "content": "Offline"
     },
     {
-      "time": 1761850800,
+      "time": 1762455600,
       "content": "Evil Stream"
     },
     {
-      "time": 1761937200,
-      "content": "Layna Cooking Collab"
+      "time": 1762542000,
+      "content": "Neuro News Network"
     },
     {
-      "time": 1762023600,
+      "time": 1762610400,
+      "content": "Twins in Japan w/ [robcdee](<https://twitch.tv/robcdee>)   **<-- Different from normal stream time!!**"
+    },
+    {
+      "time": 1762714800,
       "content": "Offline"
     },
     {
-      "time": 1762110000,
-      "content": "The Witness w/ Evil & Vedal   **OR** Minecraft w/ Others ️"
-    },
-    {
-      "time": 1762196400,
-      "content": "Offline"
+      "time": 1762801200,
+      "content": "Dev Stream"
     }
   ]
 }
