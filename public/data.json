@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Nov 10 08:21 GMT+8",
+  "lastUpdated": "Nov 17 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "859k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1435160833234698240/neuro_stream_schedule_week_45.png?ex=6912356e&is=6910e3ee&hm=dd4ee2419d5a99b1f412d5f92cd6e32c483b8be695e0e5fe099a557c72457d7c&",
+  "bilibiliFollowers": "862k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1437555056772644874/neuro_stream_schedule_week_46.png?ex=691b93fa&is=691a427a&hm=d20153fccb953302d13757d555b2ff5a02da9e9ad9cbab52dc316528e4540fd9&",
   "schedule": [
     {
-      "time": 1762282800,
+      "time": 1762887600,
       "content": "Neuro Stream"
     },
     {
-      "time": 1762369200,
-      "content": "Offline"
+      "time": 1762974000,
+      "content": "Neuro Karaoke"
     },
     {
-      "time": 1762455600,
+      "time": 1763060400,
       "content": "Evil Stream"
     },
     {
-      "time": 1762542000,
-      "content": "Neuro News Network"
-    },
-    {
-      "time": 1762610400,
-      "content": "Twins in Japan w/ [robcdee](<https://twitch.tv/robcdee>)   **<-- Different from normal stream time!!**"
-    },
-    {
-      "time": 1762714800,
+      "time": 1763146800,
       "content": "Offline"
     },
     {
-      "time": 1762801200,
-      "content": "Dev Stream"
+      "time": 1763233200,
+      "content": "Neuro 3D Debut"
+    },
+    {
+      "time": 1763319600,
+      "content": "Offline"
+    },
+    {
+      "time": 1763406000,
+      "content": "Offline"
     }
   ]
 }
