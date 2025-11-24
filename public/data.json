@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Nov 17 08:21 GMT+8",
+  "lastUpdated": "Nov 24 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "862k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1437555056772644874/neuro_stream_schedule_week_46.png?ex=691b93fa&is=691a427a&hm=d20153fccb953302d13757d555b2ff5a02da9e9ad9cbab52dc316528e4540fd9&",
+  "bilibiliFollowers": "864k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1440045751068790784/neuro_stream_schedule_week_47.png?ex=6924a39d&is=6923521d&hm=b9e1f9f10fdddc7d4f03c2e64a45704f440076637e463cbe74a99221d29f99e6&",
   "schedule": [
     {
-      "time": 1762887600,
+      "time": 1763492400,
       "content": "Neuro Stream"
     },
     {
-      "time": 1762974000,
-      "content": "Neuro Karaoke"
+      "time": 1763578800,
+      "content": "Evil Fishing"
     },
     {
-      "time": 1763060400,
+      "time": 1763665200,
       "content": "Evil Stream"
     },
     {
-      "time": 1763146800,
+      "time": 1763751600,
       "content": "Offline"
     },
     {
-      "time": 1763233200,
-      "content": "Neuro 3D Debut"
-    },
-    {
-      "time": 1763319600,
+      "time": 1763838000,
       "content": "Offline"
     },
     {
-      "time": 1763406000,
-      "content": "Offline"
+      "time": 1763928000,
+      "content": "Matara Kan & Evil Collab"
+    },
+    {
+      "time": 1764010800,
+      "content": "Evil Dev Stream"
     }
   ]
 }
