@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Nov 24 08:21 GMT+8",
+  "lastUpdated": "Dec 1 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "864k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1440045751068790784/neuro_stream_schedule_week_47.png?ex=6924a39d&is=6923521d&hm=b9e1f9f10fdddc7d4f03c2e64a45704f440076637e463cbe74a99221d29f99e6&",
+  "bilibiliFollowers": "866k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1443288780462100570/neuro_stream_schedule_week_48.png?ex=692dccec&is=692c7b6c&hm=67ad240879c4d52d778eeea9b3ce9acc1caa453ea9d78031c11f9b16d04f520b&",
   "schedule": [
     {
-      "time": 1763492400,
+      "time": 1764097200,
       "content": "Neuro Stream"
     },
     {
-      "time": 1763578800,
-      "content": "Evil Fishing"
+      "time": 1764183600,
+      "content": "Evil Karaoke"
     },
     {
-      "time": 1763665200,
+      "time": 1764270000,
       "content": "Evil Stream"
     },
     {
-      "time": 1763751600,
+      "time": 1764356400,
       "content": "Offline"
     },
     {
-      "time": 1763838000,
+      "time": 1764442800,
+      "content": "~~TBD~~ Offline"
+    },
+    {
+      "time": 1764529200,
+      "content": "The Witness w/ Evil & Vedal"
+    },
+    {
+      "time": 1764615600,
       "content": "Offline"
-    },
-    {
-      "time": 1763928000,
-      "content": "Matara Kan & Evil Collab"
-    },
-    {
-      "time": 1764010800,
-      "content": "Evil Dev Stream"
     }
   ]
 }
