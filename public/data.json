@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Jan 26 08:21 GMT+8",
+  "lastUpdated": "Feb 2 08:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "1054k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1448129836240601250/neuro_stream_schedule_week_51.png?ex=69777141&is=69761fc1&hm=d29841b83d6104db14a3f99a445d48a4e4cefb12a4989efeb9c6531afe7e5380&",
+  "bilibiliFollowers": "1065k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1467591718600835082/neuro_stream_schedule_26_week_6.png?ex=6980f0cc&is=697f9f4c&hm=06d655348120250cf6aa63c98b9a0a4d52a6fa3b5ef0e0274f2129a9d2c37987&",
   "schedule": [
     {
-      "time": 1765911600,
+      "time": 1770145200,
+      "content": "Neuro Stream"
+    },
+    {
+      "time": 1770231600,
       "content": "Offline"
     },
     {
-      "time": 1765998000,
+      "time": 1770318000,
+      "content": "Evil Stream"
+    },
+    {
+      "time": 1770404400,
       "content": "Offline"
     },
     {
-      "time": 1766084400,
+      "time": 1770490800,
       "content": "Offline"
     },
     {
-      "time": 1766170800,
-      "content": "Neuro's Birthday"
+      "time": 1770577200,
+      "content": "Offline"
     },
     {
-      "time": 1766257200,
-      "content": "Subathon"
-    },
-    {
-      "time": 1766343600,
-      "content": "Subathon"
-    },
-    {
-      "time": 1766430000,
-      "content": "Subathon"
+      "time": 1770663600,
+      "content": "Offline"
     }
   ]
 }
