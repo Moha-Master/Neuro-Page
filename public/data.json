@@ -1,36 +1,36 @@
 {
-  "lastUpdated": "Feb 23 08:21 GMT+8",
+  "lastUpdated": "Mar 7 19:21 GMT+8",
   "twitchFollowers": "756k",
-  "bilibiliFollowers": "1076k",
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1473068540222242927/neuro_stream_schedule_26_week_8.png?ex=699cc67c&is=699b74fc&hm=5cfd8c58e8db04e1d2cd4f98f4e44e6f399c086e7add17c1bda27e3dad5d621a&",
+  "bilibiliFollowers": "1082k",
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1478445578550771944/neuro_stream_schedule_26_week_10_correction.png?ex=69ad0a7e&is=69abb8fe&hm=e46e616e056f646bbe769ed05ab944f86448a23709f15a40f47a4e984109a537&",
   "schedule": [
     {
-      "time": 1771354800,
+      "time": 1772564400,
       "content": "Neuro Stream"
     },
     {
-      "time": 1771441200,
-      "content": "Evil Karaoke"
+      "time": 1772650800,
+      "content": "Neuro Karaoke"
     },
     {
-      "time": 1771527600,
+      "time": 1772737200,
       "content": "Evil Stream"
     },
     {
-      "time": 1771614000,
+      "time": 1772823600,
       "content": "Offline"
     },
     {
-      "time": 1771700400,
+      "time": 1772910000,
+      "content": "Hollow Knight w/ Vedal & Evil"
+    },
+    {
+      "time": 1772996400,
       "content": "Offline"
     },
     {
-      "time": 1771786800,
-      "content": "Offline"
-    },
-    {
-      "time": 1771873200,
-      "content": "Offline"
+      "time": 1773082800,
+      "content": "Neuro & [Camila](<https://twitch.tv/camila>) Drawing Contest"
     }
   ]
 }
