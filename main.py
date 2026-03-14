@@ -32,14 +32,19 @@ CONFIG = {
     'WEBP_PATH': Path(__file__).parent / 'frontend' / 'images' / 'schedule.webp',
     'SERVER_HOST': config['server']['host'],
     'SERVER_PORT': config['server']['port'],
-    'CRON': config['updater']['cron']
+    'CRON': config['updater']['cron'],
+    'PROXY_ENABLED': config['updater']['proxy']['enabled'],
+    'PROXY_ADDRESS': config['updater']['proxy']['address']
 }
 
 # Discord client
 intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
-client = discord.Client(intents=intents)
+client = discord.Client(
+    intents=intents,
+    proxy=CONFIG['PROXY_ADDRESS'] if CONFIG['PROXY_ENABLED'] else None
+)
 
 async def find_latest_image():
     """Find the latest image from Discord channel."""
@@ -105,7 +110,8 @@ async def get_twitch_followers():
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
             'Accept-Language': 'en-US,en;q=0.9'
         }
-        response = requests.get('https://www.twitchmetrics.net/c/85498365-vedal987', headers=headers)
+        proxies = {'http': CONFIG['PROXY_ADDRESS'], 'https': CONFIG['PROXY_ADDRESS']} if CONFIG['PROXY_ENABLED'] else None
+        response = requests.get('https://www.twitchmetrics.net/c/85498365-vedal987', headers=headers, proxies=proxies)
         response.raise_for_status()
         
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -134,8 +140,9 @@ async def get_bilibili_followers():
         url = 'https://api.bilibili.com/x/relation/stat'
         params = {'vmid': '3546729368520811'}
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+        proxies = {'http': CONFIG['PROXY_ADDRESS'], 'https': CONFIG['PROXY_ADDRESS']} if CONFIG['PROXY_ENABLED'] else None
         
-        response = requests.get(url, params=params, headers=headers)
+        response = requests.get(url, params=params, headers=headers, proxies=proxies)
         data = response.json()
         followers = data['data']['follower']
         return followers  # 返回纯数字
@@ -146,7 +153,8 @@ async def get_bilibili_followers():
 async def download_image(image_url):
     """Download and convert image to WebP."""
     try:
-        response = requests.get(image_url)
+        proxies = {'http': CONFIG['PROXY_ADDRESS'], 'https': CONFIG['PROXY_ADDRESS']} if CONFIG['PROXY_ENABLED'] else None
+        response = requests.get(image_url, proxies=proxies)
         response.raise_for_status()
         
         # Ensure directory exists
