@@ -1,0 +1,10 @@
+discord:
+  token: "YOUR_DISCORD_BOT_TOKEN_HERE"  # Get from https://discord.com/developers/applications
+  channel_id: 1234567890123456789  # Replace with actual Discord channel ID
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+
+updater:
+  cron: "single"  # Options: "single" (run once), "*/15 * * * * *" (every 15 seconds), "0 */1 * * *" (every hour)
