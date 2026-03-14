@@ -8,3 +8,6 @@ server:
 
 updater:
   cron: "single"  # Options: "single" (run once), "*/15 * * * * *" (every 15 seconds), "0 */1 * * *" (every hour)
+  proxy:
+    enabled: false  # Set to true to use proxy for HTTP requests
+    address: "http://127.0.0.1:7890"  # Proxy server address
