@@ -9,7 +9,7 @@ from pathlib import Path
 import discord
 import requests
 from bs4 import BeautifulSoup
-import schedule
+from croniter import croniter
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -293,29 +293,16 @@ frontend_path = Path(__file__).parent / 'frontend'
 app.mount("/", StaticFiles(directory=str(frontend_path), html=True), name="static")
 
 # Schedule updates
-def run_update():
-    """Wrapper function for scheduled updates."""
-    asyncio.create_task(update_data())
-
 def setup_scheduler():
     if CONFIG['CRON'] == "single":
         print("Single update mode: will update only on startup")
         return
     
-    # Check for test mode (seconds)
-    if CONFIG['CRON'].startswith("*/") and CONFIG['CRON'].endswith(" * * * * *"):
-        # Scheduled mode: */N * * * * * means every N seconds
-        try:
-            seconds = int(CONFIG['CRON'].split("/")[1].split()[0])
-            print(f"🧪 Scheduled mode: Scheduled updates every {seconds} seconds")
-            schedule.every(seconds).seconds.do(run_update)
-            return
-        except (ValueError, IndexError):
-            pass
+    if not croniter.is_valid(CONFIG['CRON']):
+        print(f"❌ Invalid cron expression: '{CONFIG['CRON']}', falling back to every hour")
+        CONFIG['CRON'] = "0 * * * *"
     
-    # Default: every hour at :00
-    schedule.every().hour.at(":00").do(run_update)
-    print("Scheduled updates every hour at :00")
+    print(f"⏰ Scheduled updates with cron: {CONFIG['CRON']}")
 
 @client.event
 async def on_ready():
@@ -331,10 +318,19 @@ async def run_discord_client():
         await client.close()
 
 async def run_scheduler():
-    """Run the scheduler loop - check every second for pending tasks."""
+    """Run the scheduler loop based on standard 5-field cron expression."""
+    cron = croniter(CONFIG['CRON'], datetime.now(pytz.timezone(CONFIG['TIMEZONE'])))
     while True:
-        schedule.run_pending()
-        await asyncio.sleep(1)
+        next_run = cron.get_next(datetime)
+        now = datetime.now(pytz.timezone(CONFIG['TIMEZONE']))
+        # Make next_run timezone-aware if needed
+        if next_run.tzinfo is None:
+            next_run = pytz.timezone(CONFIG['TIMEZONE']).localize(next_run)
+        delay = (next_run - now).total_seconds()
+        if delay > 0:
+            await asyncio.sleep(delay)
+        print(f"⏰ Running scheduled update at {datetime.now(pytz.timezone(CONFIG['TIMEZONE'])).strftime('%Y-%m-%d %H:%M:%S')}")
+        await update_data()
 
 async def startup_update():
     """Perform initial update after Discord client is ready."""
