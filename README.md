@@ -1,21 +1,37 @@
-### 关注Vedal喵，关注Vedal谢谢喵
-
 # Neuro-Page
 
-基本没了解过HTML和JS，全部代码💩使用DeepSeek-R1生成和完善
+现代化的Python前后端项目，用于跟踪Vedal的直播时间表和粉丝数据。
 
-## 主要部分
+## 功能
 
-```./scripts/updater.js```
+- 使用Discord.py从Discord频道获取最新直播时间表图片
+- 获取Twitch和Bilibili粉丝数量
+- 使用FastAPI + Uvicorn托管前端页面
+- 支持定时更新或单次更新模式
 
-利用Github Action，自动从Neuro官方Discord频道获取直播时间表图片，同时从TwitchTracker和Bilibili获取粉丝数量
+## 配置
 
-```./index.html```
+参照 `config.yaml` 文件
 
-一个简单的静态页面，调用和展示获取到的内容
+## 运行
+
+1. 安装依赖：
+   ```bash
+   python -m venv venv
+   (Linux and MacOS) venv/bin/pip install .
+   (Windows) venv\Scripts\pip.exe install .
+   ```
+
+2. 配置 `config.yaml`
+
+3. 运行：
+   ```bash
+   (Linux and MacOS) venv\bin\python main.py
+   (Windows) venv\Scripts\python.exe main.py
+   ```
+
+服务器将在配置的端口启动，前端页面可在浏览器访问。
 
 ## 已知问题
 
 - Index网页暗色模式有问题，有待调整
-
-- Action并没有在每小时的21分触发，不过反正能用，先不管它

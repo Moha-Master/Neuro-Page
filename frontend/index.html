@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
                                     <div class="content">
-                                        <p>Neuro Sama started her vtuber life on Twitch, and that date, December 21, 2022, is considered as Neuro Sama's birthday.</p>
+                                        <p>Neuro Sama started her vtuber life on Twitch, and that date, December 19, 2022, is considered as Neuro Sama's birthday.</p>
                                     </div>
                                 </div>
                             </div>
@@ -154,6 +154,28 @@
 
 
 <script>
+function formatFollowers(count) {
+    if (typeof count === 'string') {
+        count = parseInt(count.replace(/,/g, ''));
+    }
+    if (count >= 1000) {
+        return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    }
+    return count.toString();
+}
+
+function formatTime(timestamp) {
+    const date = new Date(timestamp * 1000); // Convert to milliseconds
+    const options = { 
+        month: 'short', 
+        day: 'numeric', 
+        hour: '2-digit', 
+        minute: '2-digit',
+        timeZone: 'Asia/Shanghai'
+    };
+    return date.toLocaleString('en-US', options) + ' GMT+8';
+}
+
 async function updateData() {
     try {
         const response = await fetch(`public/data.json?t=${Date.now()}`);
@@ -161,9 +183,9 @@ async function updateData() {
 
         const data = await response.json();
 
-        document.getElementById('update-time').innerHTML = `Update@${data.lastUpdated}`;
-        document.getElementById('twitch-follower').textContent = `${data.twitchFollowers} followers`;
-        document.getElementById('bili-follower').textContent = `${data.bilibiliFollowers} followers`;
+        document.getElementById('update-time').innerHTML = `Update@${formatTime(data.lastUpdated)}`;
+        document.getElementById('twitch-follower').textContent = `${formatFollowers(data.twitchFollowers)} followers`;
+        document.getElementById('bili-follower').textContent = `${formatFollowers(data.bilibiliFollowers)} followers`;
 
         console.log('Update success:', data);
     } catch (error) {
