@@ -164,10 +164,10 @@ async def get_twitch_followers():
                     followers = int(cleaned_text)
                     return followers  # 返回纯数字
         
-        return 970647  # fallback with current known value as int
+        return "Fetch Error"
     except Exception as e:
         print(f"Error getting Twitch followers: {e}")
-        return "970,647"
+        return "Fetch Error"
 
 async def get_bilibili_followers():
     """Get Bilibili followers count from API."""
@@ -183,7 +183,7 @@ async def get_bilibili_followers():
         return followers  # 返回纯数字
     except Exception as e:
         print(f"Error getting Bilibili followers: {e}")
-        return 0  # 返回0作为错误时的默认值
+        return "Fetch Error"
 
 async def download_image(image_url):
     """Download and convert image to WebP."""
@@ -367,6 +367,7 @@ async def run_scheduler():
 
 async def startup_update():
     """Perform initial update after Discord client is ready."""
+    print("🔄 Waiting for Discord client to connect...")
     # Wait for Discord client to be ready
     await client.wait_until_ready()
     print("🤖 Discord client ready, performing initial update...")
