@@ -16,6 +16,7 @@ from fastapi.responses import FileResponse
 import uvicorn
 import yaml
 from PIL import Image
+from aiohttp_socks import ProxyConnector
 
 # Load configuration
 config_path = Path(__file__).parent / 'config.yaml'
@@ -37,14 +38,48 @@ CONFIG = {
     'PROXY_ADDRESS': config['updater']['proxy']['address']
 }
 
-# Discord client
+# Discord client configuration (will be initialized in async context)
 intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
-client = discord.Client(
-    intents=intents,
-    proxy=CONFIG['PROXY_ADDRESS'] if CONFIG['PROXY_ENABLED'] else None
-)
+
+# Global client variable to be set in async context
+client = None
+
+def create_discord_client_sync():
+    """Create Discord client synchronously without proxy support initially."""
+    global client
+    # Create client initially with just proxy parameter
+    proxy_url = CONFIG['PROXY_ADDRESS'] if CONFIG['PROXY_ENABLED'] else None
+    client = discord.Client(intents=intents, proxy=proxy_url)
+
+# Initialize client immediately but without full proxy support for WebSocket
+create_discord_client_sync()
+
+async def initialize_discord_client():
+    """Re-initialize Discord client with proper proxy support for WebSocket."""
+    global client
+    proxy_url = CONFIG['PROXY_ADDRESS'] if CONFIG['PROXY_ENABLED'] else None
+    
+    if CONFIG['PROXY_ENABLED'] and proxy_url:
+        # Use ProxyConnector for full proxy support (including WebSocket)
+        connector = ProxyConnector.from_url(proxy_url)
+        # We need to recreate the client to use the connector
+        new_client = discord.Client(intents=intents, connector=connector, proxy=proxy_url)
+        
+        # Transfer event handlers if any
+        # Since we only have on_ready, we'll add it to the new client
+        @new_client.event
+        async def on_ready():
+            print(f'🏃 {new_client.user} ready.')
+        
+        client = new_client
+        return new_client
+    else:
+        @client.event
+        async def on_ready():
+            print(f'🏃 {client.user} ready.')
+        return client
 
 async def find_latest_image():
     """Find the latest image from Discord channel."""
@@ -304,9 +339,7 @@ def setup_scheduler():
     
     print(f"⏰ Scheduled updates with cron: {CONFIG['CRON']}")
 
-@client.event
-async def on_ready():
-    print(f'🏃 {client.user} ready.')
+
 
 async def run_discord_client():
     """Run Discord client in background."""
@@ -342,6 +375,9 @@ async def startup_update():
 
 async def main():
     """Main application entry point."""
+    # Initialize Discord client with proxy support
+    await initialize_discord_client()
+    
     # Setup scheduler
     setup_scheduler()
     
