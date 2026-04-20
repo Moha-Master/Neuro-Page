@@ -5,6 +5,7 @@ import aiofiles
 from datetime import datetime
 import pytz
 from pathlib import Path
+from urllib.parse import urlparse
 
 import discord
 import requests
@@ -46,40 +47,35 @@ intents.message_content = True
 # Global client variable to be set in async context
 client = None
 
-def create_discord_client_sync():
-    """Create Discord client synchronously without proxy support initially."""
+def initialize_discord_client():
+    """Initialize Discord client with proxy support for both HTTP and WebSocket."""
     global client
-    # Create client initially with just proxy parameter
-    proxy_url = CONFIG['PROXY_ADDRESS'] if CONFIG['PROXY_ENABLED'] else None
-    client = discord.Client(intents=intents, proxy=proxy_url)
 
-# Initialize client immediately but without full proxy support for WebSocket
-create_discord_client_sync()
+    client_options = {'intents': intents}
 
-async def initialize_discord_client():
-    """Re-initialize Discord client with proper proxy support for WebSocket."""
-    global client
     proxy_url = CONFIG['PROXY_ADDRESS'] if CONFIG['PROXY_ENABLED'] else None
-    
-    if CONFIG['PROXY_ENABLED'] and proxy_url:
-        # Use ProxyConnector for full proxy support (including WebSocket)
-        connector = ProxyConnector.from_url(proxy_url)
-        # We need to recreate the client to use the connector
-        new_client = discord.Client(intents=intents, connector=connector, proxy=proxy_url)
-        
-        # Transfer event handlers if any
-        # Since we only have on_ready, we'll add it to the new client
-        @new_client.event
-        async def on_ready():
-            print(f'🏃 {new_client.user} ready.')
-        
-        client = new_client
-        return new_client
-    else:
-        @client.event
-        async def on_ready():
-            print(f'🏃 {client.user} ready.')
-        return client
+    if proxy_url:
+        parsed_proxy = urlparse(proxy_url)
+        proxy_scheme = parsed_proxy.scheme.lower()
+
+        if proxy_scheme.startswith('socks'):
+            connector = ProxyConnector.from_url(proxy_url, rdns=True)
+            client_options['connector'] = connector
+            client_options['proxy'] = proxy_url
+            print(f"🌐 Discord using SOCKS proxy: {proxy_url}")
+        elif proxy_scheme in ('http', 'https'):
+            client_options['proxy'] = proxy_url
+            print(f"🌐 Discord using HTTP proxy: {proxy_url}")
+        else:
+            print(f"⚠️ Unsupported proxy scheme '{proxy_scheme}', Discord will connect directly")
+
+    client = discord.Client(**client_options)
+
+    @client.event
+    async def on_ready():
+        print(f'🏃 {client.user} ready.')
+
+    return client
 
 async def find_latest_image():
     """Find the latest image from Discord channel."""
@@ -377,7 +373,7 @@ async def startup_update():
 async def main():
     """Main application entry point."""
     # Initialize Discord client with proxy support
-    await initialize_discord_client()
+    initialize_discord_client()
     
     # Setup scheduler
     setup_scheduler()

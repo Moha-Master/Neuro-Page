@@ -13,6 +13,7 @@ dependencies = [
     "croniter",
     "pytz",
     "aiofiles",
+    "aiohttp-socks",
     "PyYAML",
     "audioop-lts",
     "Pillow",
@@ -21,4 +22,3 @@ dependencies = [
     "discord.py"
 ]
 license = "MIT"
-

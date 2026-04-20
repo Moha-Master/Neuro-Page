@@ -1,36 +1,36 @@
 {
-  "lastUpdated": 1776025262,
-  "twitchFollowers": 974408,
-  "bilibiliFollowers": 1087855,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1490863883030630563/neuro_stream_schedule_26_week_15.png?ex=69dcdaf0&is=69db8970&hm=6a06afb646e7f00e88a62d0e67f767e83b0e0e4f8545fad512e5b89e02950a2a&",
+  "lastUpdated": 1776644468,
+  "twitchFollowers": 975197,
+  "bilibiliFollowers": 1089031,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1493386216228388895/evil_stream_schedule_26_week_16.png?ex=69e6b0cb&is=69e55f4b&hm=4ab41d8713dbdae0a0c012d010dbbd4d7d73f50024b6a8b38c40219b1e734a4a&",
   "schedule": [
     {
-      "time": 1775584800,
+      "time": 1776189600,
       "content": "Neuro Stream"
     },
     {
-      "time": 1775678400,
-      "content": "Evil & Numi Hangout"
+      "time": 1776276000,
+      "content": "Evil Karaoke"
     },
     {
-      "time": 1775757600,
+      "time": 1776362400,
       "content": "Evil Stream"
     },
     {
-      "time": 1775844000,
+      "time": 1776448800,
       "content": "Offline"
     },
     {
-      "time": 1775934000,
+      "time": 1776535200,
       "content": "Offline"
     },
     {
-      "time": 1776016800,
-      "content": "Cyberpunk 2077: Phantom Liberty w/ Neuro & Vedal"
+      "time": 1776621600,
+      "content": "~~Evil & Vedal VR Hangout~~ Offline"
     },
     {
-      "time": 1776106800,
-      "content": "Offline"
+      "time": 1776708000,
+      "content": "Evil & Vedal VR Hangout"
     }
   ]
 }

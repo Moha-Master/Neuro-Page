@@ -9,5 +9,5 @@ server:
 updater:
   cron: "single"  # Options: "single" (run once), or standard 5-field cron: "*/15 * * * *" (every 15 min), "0 * * * *" (every hour), "0 3 * * *" (daily at 3am)
   proxy:
-    enabled: false  # Set to true to use proxy for HTTP requests
-    address: "http://127.0.0.1:7890"  # Proxy server address
+    enabled: false  # Set to true to use proxy for all requests (Discord + HTTP)
+    address: "socks5://127.0.0.1:7890"  # Supports socks5://, http://, https://
