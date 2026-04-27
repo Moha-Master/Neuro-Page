@@ -1,36 +1,36 @@
 {
-  "lastUpdated": 1776644468,
-  "twitchFollowers": 975197,
-  "bilibiliFollowers": 1089031,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1493386216228388895/evil_stream_schedule_26_week_16.png?ex=69e6b0cb&is=69e55f4b&hm=4ab41d8713dbdae0a0c012d010dbbd4d7d73f50024b6a8b38c40219b1e734a4a&",
+  "lastUpdated": 1777249262,
+  "twitchFollowers": 1001724,
+  "bilibiliFollowers": 1089400,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1496185325813371093/neuro_stream_schedule_26_week_17.png?ex=69ef8e2b&is=69ee3cab&hm=4d0dc9590b6f88d755dfe6f4b74b0ce98cc1b8ec8928e0bd033015ab1092d380&",
   "schedule": [
     {
-      "time": 1776189600,
+      "time": 1776794400,
       "content": "Neuro Stream"
     },
     {
-      "time": 1776276000,
-      "content": "Evil Karaoke"
+      "time": 1776880800,
+      "content": "Offline"
     },
     {
-      "time": 1776362400,
+      "time": 1776967200,
       "content": "Evil Stream"
     },
     {
-      "time": 1776448800,
+      "time": 1777057200,
+      "content": "Easy Bake Cooking w/ Numi & Evil"
+    },
+    {
+      "time": 1777140000,
       "content": "Offline"
     },
     {
-      "time": 1776535200,
+      "time": 1777226400,
       "content": "Offline"
     },
     {
-      "time": 1776621600,
-      "content": "~~Evil & Vedal VR Hangout~~ Offline"
-    },
-    {
-      "time": 1776708000,
-      "content": "Evil & Vedal VR Hangout"
+      "time": 1777312800,
+      "content": "Dev Stream"
     }
   ]
 }
