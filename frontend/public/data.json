@@ -1,35 +1,35 @@
 {
-  "lastUpdated": 1779063662,
-  "twitchFollowers": 1003536,
-  "bilibiliFollowers": 1090787,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1503423944344997908/neuro_stream_schedule_26_week_20.png?ex=6a0b3528&is=6a09e3a8&hm=0f4d64d1c25d0041fb7c5defa8fde2edce9206e81898109653cab6723b35dbd8&",
+  "lastUpdated": 1779668462,
+  "twitchFollowers": 1003917,
+  "bilibiliFollowers": 1092235,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1506038693708693504/neuro_stream_schedule_26_week_21.png?ex=6a14b855&is=6a1366d5&hm=bec7b3615420774bc5fc3a5b234a7156cb6b9b693dcf5fbfc13baf7ffe0b2ab5&",
   "schedule": [
     {
-      "time": 1778608800,
+      "time": 1779213600,
       "content": "Neuro Stream"
     },
     {
-      "time": 1778695200,
-      "content": "Evil Karaoke"
-    },
-    {
-      "time": 1778781600,
-      "content": "Evil Stream"
-    },
-    {
-      "time": 1778868000,
+      "time": 1779300000,
       "content": "Offline"
     },
     {
-      "time": 1778954400,
-      "content": "VR Hangout w/ Cerber & Evil 🐶"
+      "time": 1779386400,
+      "content": "Evil Stream"
     },
     {
-      "time": 1779040800,
-      "content": "Cyberpunk 2077: Phantom Liberty w/ Neuro & Vedal"
+      "time": 1779476400,
+      "content": "No, I'm Not Human w/ Layna & Evil"
     },
     {
-      "time": 1779127200,
+      "time": 1779559200,
+      "content": "Offline"
+    },
+    {
+      "time": 1779645600,
+      "content": "IRL Server Building w/ Vedal & Neuro 🖥️"
+    },
+    {
+      "time": 1779732000,
       "content": "Offline"
     }
   ]
