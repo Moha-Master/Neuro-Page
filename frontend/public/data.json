@@ -1,35 +1,35 @@
 {
-  "lastUpdated": 1779668462,
-  "twitchFollowers": 1003917,
-  "bilibiliFollowers": 1092235,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1506038693708693504/neuro_stream_schedule_26_week_21.png?ex=6a14b855&is=6a1366d5&hm=bec7b3615420774bc5fc3a5b234a7156cb6b9b693dcf5fbfc13baf7ffe0b2ab5&",
+  "lastUpdated": 1780258862,
+  "twitchFollowers": 1006978,
+  "bilibiliFollowers": 1093560,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1508518246922588291/neuro_stream_schedule_26_week_22_v2.png?ex=6a1dbd98&is=6a1c6c18&hm=5e5f0131ea128e13404be32b91aabdd492ee947b97c88713e1e37397fe671f80&",
   "schedule": [
     {
-      "time": 1779213600,
+      "time": 1779818400,
       "content": "Neuro Stream"
     },
     {
-      "time": 1779300000,
+      "time": 1779904800,
+      "content": "Neuro Karaoke  🎙️"
+    },
+    {
+      "time": 1779991200,
+      "content": "Evil Stream (New Outfit!!)"
+    },
+    {
+      "time": 1780077600,
       "content": "Offline"
     },
     {
-      "time": 1779386400,
-      "content": "Evil Stream"
-    },
-    {
-      "time": 1779476400,
-      "content": "No, I'm Not Human w/ Layna & Evil"
-    },
-    {
-      "time": 1779559200,
+      "time": 1780164000,
       "content": "Offline"
     },
     {
-      "time": 1779645600,
-      "content": "IRL Server Building w/ Vedal & Neuro 🖥️"
+      "time": 1780250400,
+      "content": "Neuro Plays Skyrim"
     },
     {
-      "time": 1779732000,
+      "time": 1780336800,
       "content": "Offline"
     }
   ]
