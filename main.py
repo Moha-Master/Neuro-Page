@@ -1,4 +1,3 @@
-import os
 import json
 import asyncio
 import aiofiles
@@ -13,7 +12,6 @@ from bs4 import BeautifulSoup
 from croniter import croniter
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 import uvicorn
 import yaml
 from PIL import Image
@@ -61,10 +59,10 @@ def initialize_discord_client():
         if proxy_scheme.startswith('socks'):
             connector = ProxyConnector.from_url(proxy_url, rdns=True)
             client_options['connector'] = connector
-            client_options['proxy'] = proxy_url
             print(f"🌐 Discord using SOCKS proxy: {proxy_url}")
         elif proxy_scheme in ('http', 'https'):
-            client_options['proxy'] = proxy_url
+            connector = ProxyConnector.from_url(proxy_url)
+            client_options['connector'] = connector
             print(f"🌐 Discord using HTTP proxy: {proxy_url}")
         else:
             print(f"⚠️ Unsupported proxy scheme '{proxy_scheme}', Discord will connect directly")
@@ -338,13 +336,26 @@ def setup_scheduler():
 
 
 async def run_discord_client():
-    """Run Discord client in background."""
-    try:
-        await client.start(CONFIG['DISCORD_TOKEN'])
-    except Exception as e:
-        print(f"Discord client error: {e}")
-    finally:
+    """Run Discord client in background with retry."""
+    retry_delay = 5
+    max_retry_delay = 300
+    while True:
+        try:
+            await client.start(CONFIG['DISCORD_TOKEN'])
+        except Exception as e:
+            print(f"❌ Discord client error: {e}")
+            print(f"🔄 Retrying in {retry_delay}s...")
+            try:
+                await client.close()
+            except Exception:
+                pass
+            await asyncio.sleep(retry_delay)
+            retry_delay = min(retry_delay * 2, max_retry_delay)
+            initialize_discord_client()
+            continue
+
         await client.close()
+        break
 
 async def run_scheduler():
     """Run the scheduler loop based on standard 5-field cron expression."""
@@ -364,11 +375,13 @@ async def run_scheduler():
 async def startup_update():
     """Perform initial update after Discord client is ready."""
     print("🔄 Waiting for Discord client to connect...")
-    # Wait for Discord client to be ready
-    await client.wait_until_ready()
-    print("🤖 Discord client ready, performing initial update...")
-    await update_data()
-    print("🚀 Initial update completed!")
+    try:
+        await asyncio.wait_for(client.wait_until_ready(), timeout=600)
+        print("🤖 Discord client ready, performing initial update...")
+        await update_data()
+        print("🚀 Initial update completed!")
+    except asyncio.TimeoutError:
+        print("⚠️ Initial update timed out, scheduler will handle updates")
 
 async def main():
     """Main application entry point."""
