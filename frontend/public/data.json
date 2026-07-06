@@ -1,7 +1,36 @@
 {
-  "lastUpdated": 1782692466,
-  "twitchFollowers": 1008238,
-  "bilibiliFollowers": 1100879,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1343117886167715862/1519344717773541416/neuro_stream_schedule_26_week_26.png?ex=6a427d88&is=6a412c08&hm=20740d6b9336665c8bab8af063424a1ac12e829daffb3ccf0a858bf6f3cc7f6a&",
-  "schedule": []
+  "lastUpdated": 1783297262,
+  "twitchFollowers": 1008599,
+  "bilibiliFollowers": 1104532,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1521522936782131230/neuro_stream_schedule_26_week_27.png?ex=6a4bbba8&is=6a4a6a28&hm=027935788ae72e8a3aebea9e4dba1a255a93fbd0f8e9ce8b97c8c885ed35028b&",
+  "schedule": [
+    {
+      "time": 1782842400,
+      "content": "Neuro Stream"
+    },
+    {
+      "time": 1782928800,
+      "content": "Offline"
+    },
+    {
+      "time": 1783015200,
+      "content": "Evil Stream"
+    },
+    {
+      "time": 1783101600,
+      "content": "Offline"
+    },
+    {
+      "time": 1783188000,
+      "content": "Neuro Plays Skyrim"
+    },
+    {
+      "time": 1783281600,
+      "content": "Tomodachi Life: Living the Dream w/ Camila & the Twins   **<-- Two hours after normal stream time!!**"
+    },
+    {
+      "time": 1783360800,
+      "content": "Offline"
+    }
+  ]
 }
