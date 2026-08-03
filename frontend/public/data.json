@@ -1,7 +1,40 @@
 {
-  "lastUpdated": 1785111662,
-  "twitchFollowers": 1009475,
-  "bilibiliFollowers": 1121073,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1528618476137353276/neuro_stream_schedule_26_week_30_v3.png?ex=6a678625&is=6a6634a5&hm=41dd4180e7a636b2f65428b61430b43126d8b878bba66261aec5270b7815b537&",
-  "schedule": []
+  "lastUpdated": 1785716462,
+  "twitchFollowers": 1009978,
+  "bilibiliFollowers": 1125389,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1531690684539474113/neuro_stream_schedule_26_week_31_v2.png?ex=6a70b91c&is=6a6f679c&hm=1a6ba20a5cebc56f5638dcc40b80f17aec26e8f0f12c939554314db13f072e21&",
+  "schedule": [
+    {
+      "time": 1785261600,
+      "content": "Neuro Stream"
+    },
+    {
+      "time": 1785348000,
+      "content": "Offline"
+    },
+    {
+      "time": 1785409200,
+      "content": "Onigiri & Neuro Collab"
+    },
+    {
+      "time": 1785434400,
+      "content": "Evil Stream"
+    },
+    {
+      "time": 1785520800,
+      "content": "Offline"
+    },
+    {
+      "time": 1785607200,
+      "content": "Neuro Plays Skyrim"
+    },
+    {
+      "time": 1785693600,
+      "content": "The Plane Stream 2 🛫"
+    },
+    {
+      "time": 1785780000,
+      "content": "Offline"
+    }
+  ]
 }
