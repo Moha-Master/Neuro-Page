@@ -1,39 +1,35 @@
 {
-  "lastUpdated": 1785716462,
-  "twitchFollowers": 1009978,
-  "bilibiliFollowers": 1125389,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1531690684539474113/neuro_stream_schedule_26_week_31_v2.png?ex=6a70b91c&is=6a6f679c&hm=1a6ba20a5cebc56f5638dcc40b80f17aec26e8f0f12c939554314db13f072e21&",
+  "lastUpdated": 1786321263,
+  "twitchFollowers": 1010478,
+  "bilibiliFollowers": 1127696,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1534363964107133010/neuro_stream_schedule_26_week_32.png?ex=6a79ca0c&is=6a78788c&hm=488233d98952d3032653bcff2b1cba8d17886deb14e8357513bdf07b38b3edf3&",
   "schedule": [
     {
-      "time": 1785261600,
-      "content": "Neuro Stream"
+      "time": 1785866400,
+      "content": "Neuro Steam"
     },
     {
-      "time": 1785348000,
-      "content": "Offline"
+      "time": 1785952800,
+      "content": "Evil Karaoke"
     },
     {
-      "time": 1785409200,
-      "content": "Onigiri & Neuro Collab"
-    },
-    {
-      "time": 1785434400,
+      "time": 1786039200,
       "content": "Evil Stream"
     },
     {
-      "time": 1785520800,
+      "time": 1786125600,
       "content": "Offline"
     },
     {
-      "time": 1785607200,
+      "time": 1786212000,
       "content": "Neuro Plays Skyrim"
     },
     {
-      "time": 1785693600,
-      "content": "The Plane Stream 2 🛫"
+      "time": 1786298400,
+      "content": "The Plane Steam 2 🛫"
     },
     {
-      "time": 1785780000,
+      "time": 1786384800,
       "content": "Offline"
     }
   ]
