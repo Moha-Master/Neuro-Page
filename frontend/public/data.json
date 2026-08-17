@@ -1,36 +1,36 @@
 {
-  "lastUpdated": 1786321263,
-  "twitchFollowers": 1010478,
-  "bilibiliFollowers": 1127696,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1534363964107133010/neuro_stream_schedule_26_week_32.png?ex=6a79ca0c&is=6a78788c&hm=488233d98952d3032653bcff2b1cba8d17886deb14e8357513bdf07b38b3edf3&",
+  "lastUpdated": 1786926062,
+  "twitchFollowers": 1010987,
+  "bilibiliFollowers": 1128455,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1536863878057697341/neuro_stream_schedule_26_week_33_v2.png?ex=6a838b06&is=6a823986&hm=1724c0426fbf434c1513699fc9d8ac11f35e8f034d0d4080a6a3c425994e9502&",
   "schedule": [
     {
-      "time": 1785866400,
-      "content": "Neuro Steam"
+      "time": 1786471200,
+      "content": "Neuro Stream"
     },
     {
-      "time": 1785952800,
-      "content": "Evil Karaoke"
+      "time": 1786557600,
+      "content": "Offline"
     },
     {
-      "time": 1786039200,
+      "time": 1786644000,
       "content": "Evil Stream"
     },
     {
-      "time": 1786125600,
+      "time": 1786730400,
       "content": "Offline"
     },
     {
-      "time": 1786212000,
+      "time": 1786816800,
       "content": "Neuro Plays Skyrim"
     },
     {
-      "time": 1786298400,
-      "content": "The Plane Steam 2 🛫"
+      "time": 1786903200,
+      "content": "Neuro & Zen Play Minecraft (+ Crelly)  🐲"
     },
     {
-      "time": 1786384800,
-      "content": "Offline"
+      "time": 1786989600,
+      "content": "Evil Plays osu!"
     }
   ]
 }
