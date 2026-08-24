@@ -1,36 +1,36 @@
 {
-  "lastUpdated": 1786926062,
-  "twitchFollowers": 1010987,
-  "bilibiliFollowers": 1128455,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1536863878057697341/neuro_stream_schedule_26_week_33_v2.png?ex=6a838b06&is=6a823986&hm=1724c0426fbf434c1513699fc9d8ac11f35e8f034d0d4080a6a3c425994e9502&",
+  "lastUpdated": 1787530864,
+  "twitchFollowers": 1011798,
+  "bilibiliFollowers": 1129440,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1539031896565092412/neuro_stream_schedule_26_week_34_v2.png?ex=6a8cbfa5&is=6a8b6e25&hm=4f74009de1aafb8111208828460c0b46c4c4ffedc692235483f1df856b408a45&",
   "schedule": [
     {
-      "time": 1786471200,
+      "time": 1787076000,
       "content": "Neuro Stream"
     },
     {
-      "time": 1786557600,
-      "content": "Offline"
+      "time": 1787162400,
+      "content": "Neuro Karaoke"
     },
     {
-      "time": 1786644000,
+      "time": 1787248800,
       "content": "Evil Stream"
     },
     {
-      "time": 1786730400,
+      "time": 1787335200,
+      "content": "Neuro & Geega Profile Chatters"
+    },
+    {
+      "time": 1787421600,
+      "content": "Neuro Plays Skyrim ️"
+    },
+    {
+      "time": 1787508000,
       "content": "Offline"
     },
     {
-      "time": 1786816800,
-      "content": "Neuro Plays Skyrim"
-    },
-    {
-      "time": 1786903200,
-      "content": "Neuro & Zen Play Minecraft (+ Crelly)  🐲"
-    },
-    {
-      "time": 1786989600,
-      "content": "Evil Plays osu!"
+      "time": 1787594400,
+      "content": "Offline"
     }
   ]
 }
