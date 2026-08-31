@@ -1,35 +1,35 @@
 {
-  "lastUpdated": 1787530864,
-  "twitchFollowers": 1011798,
-  "bilibiliFollowers": 1129440,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1539031896565092412/neuro_stream_schedule_26_week_34_v2.png?ex=6a8cbfa5&is=6a8b6e25&hm=4f74009de1aafb8111208828460c0b46c4c4ffedc692235483f1df856b408a45&",
+  "lastUpdated": 1788135663,
+  "twitchFollowers": 1012445,
+  "bilibiliFollowers": 1129409,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1541529742333976586/neuro_stream_schedule_26_week_35_v3.png?ex=6a95d5f2&is=6a948472&hm=5186b4b85e77ae83625ec52fa3dbd22201d47685636c3f6af827cf437fdd469c&",
   "schedule": [
     {
-      "time": 1787076000,
+      "time": 1787680800,
       "content": "Neuro Stream"
     },
     {
-      "time": 1787162400,
-      "content": "Neuro Karaoke"
-    },
-    {
-      "time": 1787248800,
-      "content": "Evil Stream"
-    },
-    {
-      "time": 1787335200,
-      "content": "Neuro & Geega Profile Chatters"
-    },
-    {
-      "time": 1787421600,
-      "content": "Neuro Plays Skyrim ️"
-    },
-    {
-      "time": 1787508000,
+      "time": 1787767200,
       "content": "Offline"
     },
     {
-      "time": 1787594400,
+      "time": 1787853600,
+      "content": "Evil Stream"
+    },
+    {
+      "time": 1787940000,
+      "content": "Offline"
+    },
+    {
+      "time": 1788026400,
+      "content": "Neuro Plays Skyrim"
+    },
+    {
+      "time": 1788112800,
+      "content": "Five Nights at Freddy's w/ Evil & Cerber"
+    },
+    {
+      "time": 1788199200,
       "content": "Offline"
     }
   ]
