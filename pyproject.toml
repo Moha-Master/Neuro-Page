@@ -22,3 +22,9 @@ dependencies = [
     "discord.py"
 ]
 license = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/Moha-Master/Neuro-Page"
+Repository = "https://github.com/Moha-Master/Neuro-Page.git"
+GitHub = "https://github.com/Moha-Master/Neuro-Page"
+Issues = "https://github.com/Moha-Master/Neuro-Page/issues"
