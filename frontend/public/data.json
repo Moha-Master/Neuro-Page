@@ -1,35 +1,35 @@
 {
-  "lastUpdated": 1788135663,
-  "twitchFollowers": 1012445,
-  "bilibiliFollowers": 1129409,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1541529742333976586/neuro_stream_schedule_26_week_35_v3.png?ex=6a95d5f2&is=6a948472&hm=5186b4b85e77ae83625ec52fa3dbd22201d47685636c3f6af827cf437fdd469c&",
+  "lastUpdated": 1788740464,
+  "twitchFollowers": 1013050,
+  "bilibiliFollowers": 1129516,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1546283001011511336/neuro_stream_schedule_26_week_37_v5.png?ex=6a9f37c3&is=6a9de643&hm=12465c24256e61deaf35747783a5a7e65fb59c16dd3ef8fccbbcfb9443e61510&",
   "schedule": [
     {
-      "time": 1787680800,
+      "time": 1788890400,
       "content": "Neuro Stream"
     },
     {
-      "time": 1787767200,
-      "content": "Offline"
+      "time": 1788967800,
+      "content": "(on [secretneuroaccount](<https://twitch.tv/secretneuroaccount>); Twitch only) Neuro's *Vivy: Fluorite Eye's Song* Ep. 1-4 Watchalong"
     },
     {
-      "time": 1787853600,
+      "time": 1789059600,
+      "content": "Charity D&D Stream"
+    },
+    {
+      "time": 1789149600,
       "content": "Evil Stream"
     },
     {
-      "time": 1787940000,
-      "content": "Offline"
-    },
-    {
-      "time": 1788026400,
+      "time": 1789236000,
       "content": "Neuro Plays Skyrim"
     },
     {
-      "time": 1788112800,
-      "content": "Five Nights at Freddy's w/ Evil & Cerber"
+      "time": 1789322400,
+      "content": "Hollow Knight: Silksong w/ Vedal & Evil"
     },
     {
-      "time": 1788199200,
+      "time": 1789408800,
       "content": "Offline"
     }
   ]
