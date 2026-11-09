@@ -1,36 +1,36 @@
 {
-  "lastUpdated": 1793578863,
-  "twitchFollowers": 1018404,
-  "bilibiliFollowers": 1134842,
-  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1564342764810797086/neuro_stream_schedule_26_week_44_v4.png?ex=6ae8d43b&is=6ae782bb&hm=96f21e946d505db3e9142ff85f88564d1700eaa13f0fdb27572ba0476b7849a5&",
+  "lastUpdated": 1794183667,
+  "twitchFollowers": 1018933,
+  "bilibiliFollowers": 1134925,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1567308029190213703/neuro_stream_schedule_26_week_45.gif?ex=6af24c59&is=6af0fad9&hm=13dd42862f97dfdee11d49145b258cb398d946f5673710f0151205bc16a54901&",
   "schedule": [
     {
-      "time": 1793127600,
+      "time": 1793732400,
       "content": "Neuro Stream"
     },
     {
-      "time": 1793205000,
-      "content": "(on [secretneuroaccount](<https://www.twitch.tv/secretneuroaccount>)) Evil's *The Garden of Words* Watchalong"
+      "time": 1793815200,
+      "content": "Offline"
     },
     {
-      "time": 1793300400,
-      "content": "Evil Stream + Halloween Karaoke"
+      "time": 1793905200,
+      "content": "Evil Stream"
     },
     {
-      "time": 1793386800,
-      "content": "Neuro & [Ywuria](<https://www.twitch.tv/ywuria>) Learn How to Fish"
+      "time": 1793991600,
+      "content": "Baldur's Gate 3 Marathon (If it's ready) - Day 1"
     },
     {
-      "time": 1793473200,
-      "content": "3D Cave Stream  🕸️"
+      "time": 1794067200,
+      "content": "Baldur's Gate 3 Marathon (If it's ready) - Day 2    **<-- Different start time!**"
     },
     {
-      "time": 1793559600,
-      "content": "Hollow Knight: Silksong w/ Vedal & Evil"
+      "time": 1794153600,
+      "content": "Baldur's Gate 3 Marathon (If it's ready) - Day 3    **<-- Different start time!**"
     },
     {
-      "time": 1793646000,
-      "content": "Neuro Beats Skyrim"
+      "time": 1794240000,
+      "content": "Baldur's Gate 3 Marathon (if it's ready) - Day 4 (if it lasts this long)    **<-- Different start time!**"
     }
   ]
 }
