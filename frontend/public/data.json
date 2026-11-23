@@ -1,7 +1,36 @@
 {
-  "lastUpdated": 1794788464,
-  "twitchFollowers": 1019374,
-  "bilibiliFollowers": 1134730,
-  "imageUrl": "https://i.ytimg.com/vi/qF232RR-NvM/maxresdefault.jpg",
-  "schedule": []
+  "lastUpdated": 1795393264,
+  "twitchFollowers": 1019776,
+  "bilibiliFollowers": 1135452,
+  "imageUrl": "https://cdn.discordapp.com/attachments/1086343861670006854/1572442282584580146/neuro_stream_schedule_26_week_47_v4.png?ex=6b04513e&is=6b02ffbe&hm=c392694aa60412a4840700478070dd7511e6b6939482a209eb9e53658eb1a9d2&",
+  "schedule": [
+    {
+      "time": 1794942000,
+      "content": "Neuro Stream"
+    },
+    {
+      "time": 1795024800,
+      "content": "Offline"
+    },
+    {
+      "time": 1795114800,
+      "content": "Evil Stream"
+    },
+    {
+      "time": 1795197600,
+      "content": "Offline"
+    },
+    {
+      "time": 1795287600,
+      "content": "Neuro & Evil Break Down EP Lyrics 🗒️"
+    },
+    {
+      "time": 1795374000,
+      "content": "BOMBANANA! w/ Cerber & The Twins 💣 🍌"
+    },
+    {
+      "time": 1795451400,
+      "content": "(on [secretneuroaccount](<https://twitch.tv/secretneuroaccount>)) Shrek 2 Watchalong w/ Neuro"
+    }
+  ]
 }
